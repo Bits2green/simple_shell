@@ -2,16 +2,15 @@
 
 int main(int argc, char *argv[])
 {
-    /*Set up signal handlers*/ 
-    signal(SIGINT, sigint_handler);
-    signal(SIGTSTP, sigtstp_handler);
-
-
     char *input = NULL;
     size_t input_size = 0;
     ssize_t read_size;
     struct Command command;
     int i;
+
+    /*Set up signal handlers*/ 
+    signal(SIGINT, sigint_handler);
+    signal(SIGTSTP, sigtstp_handler);
 
     int interactive = isatty(STDIN_FILENO); /*Check if running interactively*/
 
@@ -52,7 +51,18 @@ int main(int argc, char *argv[])
                 }
             } else {
                 /*Execute external commands*/
-                execute_command(&command);
+                current_child_pid = fork(); /*Store the PID of the child process*/
+                if (current_child_pid == 0) {
+                    /*Child Process*/
+                    execute_command(&command);
+                } else if (current_child_pid > 0) {
+                    /*Parent Process*/
+                    int status;
+                    if (waitpid(current_child_pid, &status, 0) == -1) {
+                        my_printf("Error: Wait failed\n");
+                    }
+                    current_child_pid = 0; /*Reset the PID as the command has finished*/
+                }
             }
         }
 
