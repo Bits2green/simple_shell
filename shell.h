@@ -20,8 +20,7 @@ struct Command {
     char *args[32]; /*Adjust the size as needed*/
 };
 
-
-
+pid_t current_child_pid;
 
 /* ++++++++++++++++ Functions ++++++++++++++++++++++*/
 

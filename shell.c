@@ -7,12 +7,11 @@ int main(int argc, char *argv[])
     ssize_t read_size;
     struct Command command;
     int i;
+    int interactive = isatty(STDIN_FILENO); /*Check if running interactively*/
 
     /*Set up signal handlers*/ 
     signal(SIGINT, sigint_handler);
     signal(SIGTSTP, sigtstp_handler);
-
-    int interactive = isatty(STDIN_FILENO); /*Check if running interactively*/
 
     (void)argc, (void)argv;
 
