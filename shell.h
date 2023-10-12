@@ -37,6 +37,9 @@ int execute_command(struct Command *command);
 /*Sigint_handler.c*/
 void sigint_handler(int signum);
 
+/*Sigtstp_handler.c*/
+void sigtstp_handler(int signum);
+
 
 
 #endif
