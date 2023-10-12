@@ -55,7 +55,9 @@ int main(int argc, char *argv[])
 
         /*Implement I/O redirection and pipes*/
 
-        free(input); /*Free the dynamically allocated input buffer*/
+        if (input != NULL) { /*Check if memory is not already freed*/
+            free(input); /*Free the dynamically allocated input buffer*/
+            input = NULL; /*Set to NULL to avoid double freeing*/
     }
 
     return (0);
