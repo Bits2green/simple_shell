@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
         if (input != NULL) { /*Check if memory is not already freed*/
             free(input); /*Free the dynamically allocated input buffer*/
             input = NULL; /*Set to NULL to avoid double freeing*/
+        }
     }
 
     return (0);
