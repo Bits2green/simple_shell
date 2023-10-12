@@ -19,6 +19,13 @@ int execute_command(struct Command *command) {
             my_printf("Error: Wait failed\n");
             return (-1);
         }
+
+        if (WIFEXITED(status)) {
+            int exit_status = WEXITSTATUS(status);
+            if (exit_status != 0) {
+                my_printf("Error: Command exited with status %d\n", exit_status);
+            }
+        }
     }
 
     return (0);
