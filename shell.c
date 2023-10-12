@@ -2,6 +2,11 @@
 
 int main(int argc, char *argv[])
 {
+    /*Set up signal handlers*/ 
+    signal(SIGINT, sigint_handler);
+    signal(SIGTSTP, sigtstp_handler);
+
+
     char *input = NULL;
     size_t input_size = 0;
     ssize_t read_size;

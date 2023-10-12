@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <signal.h>
 
 /* Defining Structures */
 
@@ -32,6 +33,9 @@ void parse_input(char *input, struct Command *command);
 
 /*Excecute_cmd.c*/
 int execute_command(struct Command *command);
+
+/*Sigint_handler.c*/
+void sigint_handler(int signum);
 
 
 
