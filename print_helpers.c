@@ -3,20 +3,20 @@
 int my_snprintf(char *str, size_t size, const char *format, ...)
 {
     if (size == 0)
-        return -1; // Invalid size
+        return -1; /*Invalid size*/
 
     va_list args;
     va_start(args, format);
 
-    int written = 0; // Number of characters written
+    int written = 0; /*Number of characters written*/
 
     while (*format && size > 1)
     {
         if (*format == '%')
         {
-            format++; // Move past '%'
+            format++; /*Move past '%'*/
             if (*format == '\0')
-                break; // Incomplete format specifier
+                break; /*Incomplete format specifier*/
 
             if (*format == 'c')
             {
@@ -41,7 +41,7 @@ int my_snprintf(char *str, size_t size, const char *format, ...)
             else if (*format == 'd')
             {
                 int num = va_arg(args, int);
-                char num_str[12]; // Sufficient for INT_MIN
+                char num_str[12]; /*Sufficient for INT_MIN*/
                 int len = 0;
                 if (num == 0)
                 {
@@ -68,7 +68,7 @@ int my_snprintf(char *str, size_t size, const char *format, ...)
             }
             else
             {
-                // Unsupported format specifier
+                /*Unsupported format specifier*/
                 *str = '%';
                 str++;
                 size--;
@@ -92,7 +92,7 @@ int my_snprintf(char *str, size_t size, const char *format, ...)
         format++;
     }
 
-        // Null-terminate the string if there's space
+        /*Null-terminate the string if there's space*/
         if (size > 0) *str = '\0';
 
     va_end(args);

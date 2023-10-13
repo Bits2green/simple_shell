@@ -2,7 +2,6 @@
 
 int main(int argc, char *argv[], char *envp[])
 {
-    pid_t current_child_pid;
     char *input = NULL;
     size_t input_size = 0;
     ssize_t read_size;
@@ -68,7 +67,7 @@ int main(int argc, char *argv[], char *envp[])
         /*Free dynamically allocated memory in the command struct*/
         if (command.name != NULL) {
             free(command.name);
-            for (int i = 0; command.args[i] != NULL; i++) {
+            for (i = 0; command.args[i] != NULL; i++) {
                 free(command.args[i]);
             }
             /*Reset the command struct*/
