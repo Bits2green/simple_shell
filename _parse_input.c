@@ -1,13 +1,26 @@
 #include "shell.h"
 
+/**
+ * parse_input - parses the command provided by the user
+ * @input: the command
+ * @Command: Structure to handle the input
+ * @envp: provides the PATH to the executable in the /bin folder
+ * 
+ * Return: 0
+*/
+
 void parse_input(char *input, struct Command *command, char **envp) {
+
+    int i;
+    char *token;
+
     /*Initialize the command's arguments*/
-    for (int i = 0; i < sizeof(command->args) / sizeof(command->args[0]); i++) {
+    for (i = 0; i < sizeof(command->args) / sizeof(command->args[0]); i++) {
         command->args[i] = NULL;
     }
 
     /*Tokenize the input to separate the command name and its arguments*/
-    char *token = strtok(input, " \t\n"); /*Tokenize based on space, tab, and newline*/
+    token = strtok(input, " \t\n"); /*Tokenize based on space, tab, and newline*/
 
     /*Initialize the argument index*/
     int arg_index = 0;
@@ -24,7 +37,7 @@ void parse_input(char *input, struct Command *command, char **envp) {
             /*Subsequent tokens are arguments*/
             /*Expand environment variables in arguments*/
             if (token[0] == '$') {
-                char *var_name = token + 1; // Skip the '$'
+                char *var_name = token + 1; /*Skip the '$'*/
                 char *var_value = custom_getenv(var_name, envp);
                 if (var_value != NULL) {
                     /*Replace the argument with the environment variable value*/

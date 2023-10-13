@@ -8,7 +8,9 @@ void exit_shell() {
 
 /*Print the current environment variables*/
 void print_environment(char **envp) {
-    for (int i = 0; envp[i] != NULL; i++) {
+    int i;
+
+    for (i = 0; envp[i] != NULL; i++) {
         my_printf("%s\n", envp[i]);
     }
 }
