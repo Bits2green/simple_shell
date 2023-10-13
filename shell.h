@@ -53,6 +53,17 @@ int my_strcmp(const char *s1, const char *s2);
 size_t my_strlen(const char *str);
 char *my_strcpy(char *dest, const char *src);
 
+/*my_snprintf()*/
+int my_snprintf(char *str, size_t size, const char *format, ...);
+
+/*my_putint()*/
+void my_putint(int num);
+
+/*my_putchar()*/
+void my_putchar(char c);
+
+/*my_puts()*/
+void my_puts(const char *str);
 
 
 #endif
