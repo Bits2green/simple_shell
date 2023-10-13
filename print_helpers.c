@@ -2,13 +2,17 @@
 
 int my_snprintf(char *str, size_t size, const char *format, ...)
 {
+    int i;
+    int written;
+    va_list args;
+    int temp;
+
     if (size == 0)
         return -1; /*Invalid size*/
 
-    va_list args;
     va_start(args, format);
 
-    int written = 0; /*Number of characters written*/
+    written = 0; /*Number of characters written*/
 
     while (*format && size > 1)
     {
@@ -52,13 +56,13 @@ int my_snprintf(char *str, size_t size, const char *format, ...)
                     num_str[len++] = '-';
                     num = -num;
                 }
-                int temp = num;
+                temp = num;
                 while (temp != 0)
                 {
                     num_str[len++] = '0' + (temp % 10);
                     temp /= 10;
                 }
-                for (int i = len - 1; i >= 0 && size > 1; i--)
+                for (i = len - 1; i >= 0 && size > 1; i--)
                 {
                     *str = num_str[i];
                     str++;

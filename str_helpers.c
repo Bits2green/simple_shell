@@ -29,13 +29,14 @@ char *my_strcpy(char *dest, const char *src) {
 char *my_strdup(const char *str)
 {
     size_t len;
+    char *copy;
 
     if (str == NULL) {
         return (NULL);
     }
 
     len = my_strlen(str) + 1;
-    char *copy = (char *)malloc(len);
+    copy = (char *)malloc(len);
 
     if (copy != NULL) {
         my_strcpy(copy, str);
