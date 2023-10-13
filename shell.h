@@ -20,24 +20,38 @@ struct Command {
     char *args[32]; /*Adjust the size as needed*/
 };
 
-pid_t current_child_pid;
-
 /* ++++++++++++++++ Functions ++++++++++++++++++++++*/
 
 /*mv_print.c*/
 void my_printf(const char *format, ...);
 
-/* Tokenizer.c */
-void parse_input(char *input, struct Command *command);
+/* _parse_input.c */
+void parse_input(char *input, struct Command *command, char **envp);
 
-/*Excecute_cmd.c*/
+/*excecute_cmd_v1.c*/
 int execute_command(struct Command *command);
 
-/*Sigint_handler.c*/
+/*sigint_handler.c*/
 void sigint_handler(int signum);
 
-/*Sigtstp_handler.c*/
-void sigtstp_handler(int signum);
+/*expandvars.c*/
+void expand_env_vars(struct Command *command);
+
+/*_getenv.c*/
+char *custom_getenv(const char *var_name, char **envp);
+
+/*execute_cmd_v2.c*/
+int execute_command_with_path(struct Command *command, char **envp);
+
+/*builtins.c*/
+void exit_shell();
+void print_environment(char **envp);
+
+/*str_helpers.c*/
+char *my_strdup(const char *str);
+int my_strcmp(const char *s1, const char *s2);
+size_t my_strlen(const char *str);
+char *my_strcpy(char *dest, const char *src);
 
 
 

@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int execute_command(struct Command *command) {
+int execute_command(struct Command *command, char **envp) {
     pid_t child_pid = fork();
 
     if (child_pid == -1) {

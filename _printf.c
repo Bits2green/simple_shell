@@ -1,6 +1,4 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "shell.h"
 
 void my_printf(const char *format, ...) {
     va_list args;
