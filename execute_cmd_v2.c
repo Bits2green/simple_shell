@@ -7,7 +7,7 @@ int execute_command_with_path(struct Command *command, char **envp) {
     pid_t current_child_pid;
     char *token;
     char *path = custom_getenv("PATH", envp);
-    
+
     if (path == NULL) {
         my_printf("PATH environment variable not set.\n");
         return -1;
@@ -19,7 +19,7 @@ int execute_command_with_path(struct Command *command, char **envp) {
     while (token != NULL) {
         char full_path[MAX_INPUT_SIZE]; /*Adjust the size as needed*/
         /*Form the full path to the executable*/
-        snprintf(full_path, sizeof(full_path), "%s/%s", token, command->name);
+        my_snprintf(full_path, sizeof(full_path), "%s/%s", token, command->name);
 
         /*Check if the executable exists in the directory*/
         if (access(full_path, X_OK) == 0) {

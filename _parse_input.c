@@ -14,7 +14,7 @@ void parse_input(char *input, struct Command *command, char **envp) {
     int i;
     char *token;
     int arg_index = 0;
-
+    int is_command_name_set;
 
     /*Initialize the command's arguments*/
     for (i = 0; i < sizeof(command->args) / sizeof(command->args[0]); i++) {
@@ -28,7 +28,7 @@ void parse_input(char *input, struct Command *command, char **envp) {
     arg_index = 0;
     
     /*Initialize a flag to determine if we've encountered the command name*/
-    int is_command_name_set = 0;
+    is_command_name_set = 0;
 
     while (token != NULL) {
         if (!is_command_name_set) {
