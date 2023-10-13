@@ -13,6 +13,8 @@ void parse_input(char *input, struct Command *command, char **envp) {
 
     int i;
     char *token;
+    int arg_index = 0;
+
 
     /*Initialize the command's arguments*/
     for (i = 0; i < sizeof(command->args) / sizeof(command->args[0]); i++) {
@@ -23,7 +25,7 @@ void parse_input(char *input, struct Command *command, char **envp) {
     token = strtok(input, " \t\n"); /*Tokenize based on space, tab, and newline*/
 
     /*Initialize the argument index*/
-    int arg_index = 0;
+    arg_index = 0;
     
     /*Initialize a flag to determine if we've encountered the command name*/
     int is_command_name_set = 0;

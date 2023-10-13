@@ -3,14 +3,18 @@
 
 /*Custom function to execute a command using the PATH*/
 int execute_command_with_path(struct Command *command, char **envp) {
+
+    pid_t current_child_pid;
+    char *token;
     char *path = custom_getenv("PATH", envp);
+    
     if (path == NULL) {
         my_printf("PATH environment variable not set.\n");
         return -1;
     }
 
     /*Tokenize the PATH value based on ':'*/
-    char *token = strtok(path, ":");
+    token = strtok(path, ":");
 
     while (token != NULL) {
         char full_path[MAX_INPUT_SIZE]; /*Adjust the size as needed*/
