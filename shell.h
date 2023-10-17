@@ -17,6 +17,12 @@
 #define COMMAND_AND 2
 #define COMMAND_CHAIN 3
 
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} builtin_table;
+
 typedef struct passinfo
 {
 	char *arg;

@@ -84,7 +84,7 @@ int replace_command_alias(info_t *info)
 
     for (i = 0; i < 10; i++)
     {
-        node = find_alias_node(info->alias, info->command_argv[0], '=');
+        node = find_node_starts_with(info->alias, info->command_argv[0], '=');
         if (!node)
         {
             return (0);
@@ -95,7 +95,7 @@ int replace_command_alias(info_t *info)
         {
             return (0);
         }
-        p = strdup(p + 1);
+        p = custom_strdup(p + 1);
         if (!p)
         {
             return (0);
@@ -123,23 +123,23 @@ int replace_command_vars(info_t *info)
             continue;
         }
 
-        if (!strcmp(info->command_argv[i], "$?"))
+        if (!custom_strcmp(info->command_argv[i], "$?"))
         {
-            replace_string(&(info->command_argv[i]), strdup(convert_number(info->status, 10, 0)));
+            replace_string(&(info->command_argv[i]), custom_strdup(custom_convert_number(info->status, 10, 0)));
             continue;
         }
-        if (!strcmp(info->command_argv[i], "$$"))
+        if (!custom_strcmp(info->command_argv[i], "$$"))
         {
-            replace_string(&(info->command_argv[i]), strdup(convert_number(getpid(), 10, 0)));
+            replace_string(&(info->command_argv[i]), custom_strdup(custom_convert_number(getpid(), 10, 0)));
             continue;
         }
-        node = find_node_with_prefix(info->environment, &info->command_argv[i][1], '=');
+        node = find_node_starts_with(info->environment, &info->command_argv[i][1], '=');
         if (node)
         {
-            replace_string(&(info->command_argv[i]), strdup(strchr(node->str, '=') + 1));
+            replace_string(&(info->command_argv[i]), custom_strdup(custom_strchr(node->str, '=') + 1));
             continue;
         }
-        replace_string(&(info->command_argv[i]), strdup(""));
+        replace_string(&(info->command_argv[i]), custom_strdup(""));
     }
     return (0);
 }

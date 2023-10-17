@@ -8,7 +8,7 @@
  */
 int my_history(info_t *info)
 {
-	print_list(info->history);
+	print_linked_list(info->shell_history);
 	return (0);
 }
 
@@ -24,14 +24,14 @@ int unset_alias(info_t *info, char *str)
 	char *p, c;
 	int ret;
 
-	p = _strchr(str, '=');
+	p = custom_strchr(str, '=');
 	if (!p)
 		return (1);
 
 	c = *p;
 	*p = 0;
 	ret = delete_node_at_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+		get_node_index_in_list(info->alias, find_node_starts_with(info->alias, str, -1)));
 	*p = c;
 	return (ret);
 }
@@ -47,14 +47,14 @@ int set_alias(info_t *info, char *str)
 {
 	char *p;
 
-	p = _strchr(str, '=');
+	p = custom_strchr(str, '=');
 	if (!p)
 		return (1);
 	if (!*++p)
 		return (unset_alias(info, str));
 
 	unset_alias(info, str);
-	return add_node_end(&(info->alias), str, 0) == NULL;
+	return add_node_at_end(&(info->alias), str, 0) == NULL;
 }
 
 /**
@@ -69,12 +69,12 @@ int print_alias(list_t *node)
 
 	if (node)
 	{
-		p = _strchr(node->str, '=');
+		p = custom_strchr(node->str, '=');
 		for (a = node->str; a <= p; a++)
-			_putchar(*a);
-		_putchar('\'');
-		_puts(p + 1);
-		_puts("'\n");
+			custom_putchar(*a);
+		custom_putchar('\'');
+		custom_puts(p + 1);
+		custom_puts("'\n");
 		return (0);
 	}
 	return (1);
@@ -105,11 +105,11 @@ int my_alias(info_t *info)
 
 	for (i = 1; info->command_argv[i]; i++)
 	{
-		p = _strchr(info->command_argv[i], '=');
+		p = custom_strchr(info->command_argv[i], '=');
 		if (p)
 			set_alias(info, info->command_argv[i]);
 		else
-			print_alias(node_starts_with(info->alias, info->command_argv[i], '='));
+			print_alias(find_node_starts_with(info->alias, info->command_argv[i], '='));
 	}
 
 	return (0);

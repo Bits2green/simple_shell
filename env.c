@@ -69,7 +69,7 @@ custom_eputs("Too few arguments.\n");
 return (1);
 }
 for (i = 1; i <= info->argc; i++)
-custom_unset_env_var(info, info->command_command_argv[i]);
+custom_unset_env_var(info, info->command_argv[i]);
 
 return (0);
 }

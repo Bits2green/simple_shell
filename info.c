@@ -38,8 +38,8 @@ for (i = 0; info->command_argv && info->command_argv[i]; i++)
 ;
 info->argc = i;
 
-custom_replace_alias(info);
-custom_replace_vars(info);
+replace_command_alias(info);
+replace_command_vars(info);
 }
 }
 
@@ -55,17 +55,17 @@ info->command_argv = NULL;
 info->path = NULL;
 if (all)
 {
-if (!info->cmd_buf)
+if (!info->command_chain_buffer)
 free(info->arg);
 if (info->environment)
-custom_free_list(&(info->environment));
-if (info->history)
-custom_free_list(&(info->history));
+free_string_list(&(info->environment));
+if (info->shell_history)
+free_string_list(&(info->shell_history));
 if (info->alias)
-custom_free_list(&(info->alias));
+free_string_list(&(info->alias));
 custom_ffree(info->custom_environ);
 info->custom_environ = NULL;
-custom_bfree((void **)info->cmd_buf);
+custom_free((void **)info->command_chain_buffer);
 if (info->readfd > 2)
 close(info->readfd);
 custom_putchar(BUF_FLUSH);

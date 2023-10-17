@@ -18,8 +18,8 @@ int my_exit(info_t *info)
 		{
 			info->status = 2;
 			custom_print_error(info, "Illegal number: ");
-			custom_eputs(info->command_argv[1]);
-			custom_eputchar('\n');
+			customcustom_eputs(info->command_argv[1]);
+			customcustom_eputchar('\n');
 			return (1);
 		}
 
@@ -44,28 +44,28 @@ int my_cd(info_t *info)
 
 	s = getcwd(buffer, 1024);
 	if (!s)
-		_puts("TODO: Handle getcwd failure here\n");
+		customcustom_puts("TODO: Handle getcwd failure here\n");
 
 	if (!info->command_argv[1])
 	{
-		dir = _getenv(info, "HOME=");
+		dir = print_custom_env(info, "HOME=");
 		if (!dir)
-			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+			chdir_ret = chdir((dir = print_custom_env(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
-	else if (_strcmp(info->command_argv[1], "-") == 0)
+	else if (custom_strcmp(info->command_argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!print_custom_env(info, "OLDPWD="))
 		{
-			_puts(s);
-			_putchar('\n');
+			custom_puts(s);
+			custom_putchar('\n');
 			return (1);
 		}
 
-		_puts(_getenv(info, "OLDPWD="));
-		_putchar('\n');
-		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+		custom_puts(print_custom_env(info, "OLDPWD="));
+		custom_putchar('\n');
+		chdir_ret = chdir((dir = print_custom_env(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 	{
@@ -75,13 +75,13 @@ int my_cd(info_t *info)
 	if (chdir_ret == -1)
 	{
 		print_error(info, "can't cd to ");
-		_eputs(info->command_argv[1]);
-		_eputchar('\n');
+		custom_eputs(info->command_argv[1]);
+		custom_eputchar('\n');
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		custom_set_env_var(info, "OLDPWD", print_custom_env(info, "PWD="));
+		custom_set_env_var(info, "PWD", getcwd(buffer, 1024));
 	}
 
 	return (0);
@@ -98,9 +98,9 @@ int my_help(info_t *info)
 	char **arg_array;
 
 	arg_array = info->command_argv;
-	_puts("Help command works. Function not yet implemented\n");
+	custom_puts("Help command works. Function not yet implemented\n");
 
 	if (0)
-		_puts(*arg_array); /* Temporary unused variable workaround */
+		custom_puts(*arg_array); /* Temporary unused variable workaround */
 	return (0);
 }
