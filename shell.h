@@ -37,10 +37,20 @@ char *custom_strdup(const char *str);
 void custom_puts(char *str);
 int custom_putchar(char c);
 
+/*even_more_string_helpers.c*/
+char *custom_strncpy(char *dest, char *src, int n);
+char *custom_strncat(char *dest, char *src, int n);
+char *custom_strchr(char *s, char c);
+
 /*reallocate_helper.c*/
 char *custom_memset(char *s, char b, unsigned int n);
 void custom_ffree(char **pp);
 void *custom_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
+/*info.c*/
+void custom_clear_info(info_t *info);
+void custom_set_info(info_t *info, char **av);
+void custom_free_info(info_t *info, int all);
 
 
 
