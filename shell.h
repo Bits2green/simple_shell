@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <sys/wait.h>
 #include <sys/types.h>
@@ -11,6 +11,8 @@
 #include <dirent.h>
 #include <limits.h>
 #include <string.h>
+
+extern char **environ;
 
 int compare_strings(char *str1, char *str2);
 int write_char(char ch);
@@ -26,16 +28,11 @@ char **parseInput(char *input);
 void handleCtrlC(int signal);
 
 /*shell_prompt.c*/
-void runShell(void)
+void runShell(void);
 
-void executeCommand(char **command)
+void executeCommand(char **command);
 
 char *findExecutablePath(char *command);
-
-extern char **environ;
-
-
-
 
 
 #endif
