@@ -9,6 +9,7 @@
 **/
 char *findExecutablePath(char *command)
 {
+char **environment;
 DIR *directory;
 struct dirent *entry;
 char *cmd, comp;

@@ -13,8 +13,6 @@
 #include <string.h>
 #include <signal.h>
 
-extern char **environment;
-
 int compare_strings(char *str1, char *str2);
 int write_char(char ch);
 void print_string(char *str);
