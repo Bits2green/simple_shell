@@ -24,7 +24,7 @@ int custom_strlen(char *str)
  * @str1: The first string.
  * @str2: The second string.
  *
- * Return: Negative if str1 < str2, positive if str1 > str2, zero if str1 == str2.
+ * Return: -ve if str1 < str2, +ve if str1 > str2, 0 if str1 == str2.
  */
 int custom_strcmp(char *str1, char *str2)
 {
