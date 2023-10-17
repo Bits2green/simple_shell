@@ -32,7 +32,8 @@ int isExitCommand(char *userInput, char *exitCommand)
 {
 	int index = 0;
 
-	for (; (*exitCommand != '\0' && *userInput != '\0') && *userInput == *exitCommand; userInput++)
+	for (; (*exitCommand != '\0' && *userInput != '\0')
+    && *userInput == *exitCommand; userInput++)
 	{
 		if (index == 3)
 			break;
@@ -53,7 +54,8 @@ int isEnvCommand(char *userInput, char *envCommand)
 {
 	int index = 0;
 
-	for (; (*envCommand != '\0' && *userInput != '\0') && *userInput == *envCommand; userInput++)
+	for (; (*envCommand != '\0' && *userInput != '\0')
+    && *userInput == *envCommand; userInput++)
 	{
 		if (index == 2)
 			break;
@@ -85,7 +87,7 @@ char **parseInput(char *input)
 		token = strtok(NULL, delimiter);
 	}
 	executeProcess(tokens);
-	return tokens;
+	return (tokens);
 }
 
 /**
