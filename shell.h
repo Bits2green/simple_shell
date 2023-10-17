@@ -52,6 +52,20 @@ void custom_clear_info(info_t *info);
 void custom_set_info(info_t *info, char **av);
 void custom_free_info(info_t *info, int all);
 
+/*lists_helper.c*/
+list_t *add_node_at_start(list_t **head, const char *data, int index);
+list_t *add_node_at_end(list_t **head, const char *data, int index);
+size_t print_list_strings(const list_t *head);
+int delete_node_by_index(list_t **head, unsigned int index);
+void free_string_list(list_t **head_ptr);
+
+/*more_lists_helpers.c*/
+size_t linked_list_length(const list_t *head);
+char **linked_list_to_strings(list_t *head);
+size_t print_linked_list(const list_t *head);
+list_t *find_node_starts_with(list_t *head, char *prefix, char next_char);
+ssize_t get_node_index_in_list(list_t *head, list_t *node);
+
 
 
 #endif
