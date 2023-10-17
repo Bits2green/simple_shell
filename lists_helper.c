@@ -96,7 +96,7 @@ _puts("\n");
 head = head->next;
 count++;
 }
-return count;
+return (count);
 }
 
 /**
@@ -112,7 +112,7 @@ list_t *current_node, *prev_node;
 unsigned int i = 0;
 
 if (!head || !*head)
-return 0;
+return (0);
 
 if (!index)
 {
@@ -120,7 +120,7 @@ current_node = *head;
 *head = (*head)->next;
 free(current_node->str);
 free(current_node);
-return 1;
+return (1);
 }
 current_node = *head;
 while (current_node)
@@ -130,13 +130,13 @@ if (i == index)
 prev_node->next = current_node->next;
 free(current_node->str);
 free(current_node);
-return 1;
+return (1);
 }
 i++;
 prev_node = current_node;
 current_node = current_node->next;
 }
-return 0;
+return (0);
 }
 
 /**

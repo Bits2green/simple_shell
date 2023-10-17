@@ -15,7 +15,7 @@ while (head)
 head = head->next;
 count++;
 }
-return count;
+return (count);
 }
 
 /**
@@ -33,11 +33,11 @@ char **strings;
 char *str;
 
 if (!head || !length)
-return NULL;
+return (NULL);
 
 strings = malloc(sizeof(char *) * (length + 1));
 if (!strings)
-return NULL;
+return (NULL);
 
 for (i = 0; node; node = node->next, i++)
 {
@@ -47,14 +47,14 @@ if (!str)
 for (size_t j = 0; j < i; j++)
 free(strings[j]);
 free(strings);
-return NULL;
+return (NULL);
 }
 
-str = _strcpy(str, node->str);
+str = custom_strcpy(str, node->str);
 strings[i] = str;
 }
 strings[i] = NULL;
-return strings;
+return (strings);
 }
 
 /**
@@ -77,7 +77,7 @@ _puts("\n");
 head = head->next;
 count++;
 }
-return count;
+return (count);
 }
 
 /**
@@ -99,7 +99,7 @@ if (p && ((next_char == -1) || (*p == next_char)))
 return head;
 head = head->next;
 }
-return NULL;
+return (NULL);
 }
 
 /**
@@ -120,5 +120,5 @@ return index;
 head = head->next;
 index++;
 }
-return -1;
+return (-1);
 }
