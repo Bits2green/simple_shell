@@ -69,11 +69,11 @@ size_t count = 0;
 
 while (head)
 {
-_puts(convert_number(head->num, 10, 0));
-_putchar(':');
-_putchar(' ');
-_puts(head->str ? head->str : "(nil)");
-_puts("\n");
+custom_putsonvert_number(head->num, 10, 0));
+custom_putchar(':');
+custom_putchar(' ');
+custom_puts(head->str ? head->str : "(nil)");
+custom_puts("\n");
 head = head->next;
 count++;
 }
