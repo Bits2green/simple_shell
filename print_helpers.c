@@ -1,92 +1,121 @@
 #include "shell.h"
 
-/**
-* custom_eputs - Prints an input string to stderr.
-* @str: The string to be printed.
-*
-* Return: Nothing.
-*/
-void custom_eputs(char *str)
+int my_snprintf(char *str, size_t size, const char *format, ...)
 {
-int i = 0;
+int i;
+int written;
+va_list args;
+int temp;
 
-if (!str)
-return;
+if (size == 0)
+return -1; /*Invalid size*/
 
-while (str[i] != '\0')
+va_start(args, format);
+
+written = 0; /*Number of characters written*/
+
+while (*format && size > 1)
 {
-custom_eputchar(str[i]);
-i++;
+if (*format == '%')
+{
+format++; /*Move past '%'*/
+if (*format == '\0')
+break; /*Incomplete format specifier*/
+
+if (*format == 'c')
+{
+char c = va_arg(args, int);
+*str = c;
+str++;
+size--;
+written++;
+}
+else if (*format == 's')
+{
+const char *source = va_arg(args, const char *);
+while (*source && size > 1)
+{
+*str = *source;
+str++;
+source++;
+size--;
+written++;
 }
 }
-
-/**
-* custom_eputchar - Writes the character c to stderr.
-* @c: The character to print.
-*
-* Return: On success 1.
-* On error, -1 is returned, and errno is set appropriately.
-*/
-int custom_eputchar(char c)
+else if (*format == 'd')
 {
-static int i;
-static char buf[WRITE_BUF_SIZE];
-
-if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+int num = va_arg(args, int);
+char num_str[12]; /*Sufficient for INT_MIN*/
+int len = 0;
+if (num == 0)
 {
-write(2, buf, i);
-i = 0;
+num_str[len++] = '0';
+}
+else if (num < 0)
+{
+num_str[len++] = '-';
+num = -num;
+}
+temp = num;
+while (temp != 0)
+{
+num_str[len++] = '0' + (temp % 10);
+temp /= 10;
+}
+for (i = len - 1; i >= 0 && size > 1; i--)
+{
+*str = num_str[i];
+str++;
+size--;
+written++;
+}
+}
+else
+{
+/*Unsupported format specifier*/
+*str = '%';
+str++;
+size--;
+written++;
+if (size == 1)
+break;
+*str = *format;
+str++;
+size--;
+written++;
+}
+}
+else
+{
+*str = *format;
+str++;
+format++;
+size--;
+written++;
+}
+format++;
 }
 
-if (c != BUF_FLUSH)
-buf[i++] = c;
+/*Null-terminate the string if there's space*/
+if (size > 0) *str = '\0';
 
-return (1);
+va_end(args);
+return written;
 }
 
-/**
-* custom_putfd - Writes the character c to the given file descriptor.
-* @c: The character to print.
-* @fd: The file descriptor to write to.
-*
-* Return: On success 1.
-* On error, -1 is returned, and errno is set appropriately.
-*/
-int custom_putfd(char c, int fd)
+void my_putint(int num)
 {
-static int i;
-static char buf[WRITE_BUF_SIZE];
-
-if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
-{
-write(fd, buf, i);
-i = 0;
+char buffer[32];
+int len = my_snprintf(buffer, sizeof(buffer), "%d", num);
+write(STDOUT_FILENO, buffer, len);
 }
 
-if (c != BUF_FLUSH)
-buf[i++] = c;
-
-return (1);
+void my_putchar(char c)
+{
+write(STDOUT_FILENO, &c, 1);
 }
 
-/**
-* custom_putsfd - Prints an input string to the specified file descriptor.
-* @str: The string to be printed.
-* @fd: The file descriptor to write to.
-*
-* Return: The number of characters written.
-*/
-int custom_putsfd(char *str, int fd)
+void my_puts(const char *str)
 {
-int i = 0;
-
-if (!str)
-return (0);
-
-while (*str)
-{
-i += custom_putfd(*str++, fd);
-}
-
-return (i);
+write(STDOUT_FILENO, str, my_strlen(str));
 }

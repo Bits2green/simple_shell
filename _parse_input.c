@@ -1,87 +1,63 @@
 #include "shell.h"
 
 /**
-* is_executable - determines if a file is an executable command
-* @info: the info struct
-* @path: path to the file
+* parse_input - parses the command provided by the user
+* @input: the command
+* @Command: Structure to handle the input
+* @envp: provides the PATH to the executable in the /bin folder
 *
-* Return: 1 if true, 0 otherwise
+* Return: 0
 */
-int is_executable(info_t *info, char *path)
-{
-struct stat filecustom_stat;
 
-(void)info;
-if (!path || stat(path, &filecustom_stat) != 0)
-return (0);
+void parse_input(char *input, struct Command *command, char **envp) {
 
-if (S_ISREG(filecustom_stat.st_mode))
-return (1);
-return (0);
-}
+size_t i;
+char *token;
+int arg_index = 0;
+int is_command_name_set;
 
-/**
-* copy_chars - copies characters from the source to a buffer
-* @src: source string
-* @start: starting index
-* @stop: stopping index
-*
-* Return: pointer to the new buffer
-*/
-char *copy_chars(char *src, int start, int stop)
-{
-static char buffer[1024];
-int i = 0, k = 0;
-
-for (k = 0, i = start; i < stop; i++)
-{
-if (src[i] != ':')
-buffer[k++] = src[i];
-}
-buffer[k] = 0;
-return (buffer);
+/*Initialize the command's arguments*/
+for (i = 0; i < sizeof(command->args) / sizeof(command->args[0]); i++) {
+command->args[i] = NULL;
 }
 
-/**
-* find_executable_path - finds full path
-* of a command in the PATH environment variable
-* @info: the info struct
-* @pathcustom_str: the PATH string
-* @command: the command to find
-*
-* Return: full path of the command if found, or NULL
-*/
-char *find_executable_path(info_t *info, char *pathcustom_str, char *command)
-{
-int i = 0, curr_pos = 0;
-char *path;
+/*Tokenize the input to separate the command name and its arguments*/
+token = strtok(input, " \t\n"); /*Tokenize based on space, tab, and newline*/
 
-if (!pathcustom_str)
-return (NULL);
-if (custom_strlen(command) > 2 && custom_starts_with(command, "./"))
-{
-if (is_executable(info, command))
-return (command);
+/*Initialize the argument index*/
+arg_index = 0;
+
+/*Initialize a flag to determine if we've encountered the command name*/
+is_command_name_set = 0;
+
+while (token != NULL) {
+if (!is_command_name_set) {
+/*The first token is the command name*/
+command->name = my_strdup(token);
+is_command_name_set = 1;
+} else {
+/*Subsequent tokens are arguments*/
+/*Expand environment variables in arguments*/
+if (token[0] == '$') {
+char *var_name = token + 1; /*Skip the '$'*/
+char *var_value = custom_getenv(var_name, envp);
+if (var_value != NULL) {
+/*Replace the argument with the environment variable value*/
+command->args[arg_index] = my_strdup(var_value);
+} else {
+/*Environment variable not found, keep the original argument*/
+command->args[arg_index] = my_strdup(token);
 }
-while (1)
-{
-if (!pathcustom_str[i] || pathcustom_str[i] == ':')
-{
-path = copy_chars(pathcustom_str, curr_pos, i);
-if (!*path)
-custom_strcat(path, command);
-else
-{
-custom_strcat(path, "/");
-custom_strcat(path, command);
+} else {
+/*Not an environment variable, keep the original argument*/
+command->args[arg_index] = my_strdup(token);
 }
-if (is_executable(info, path))
-return (path);
-if (!pathcustom_str[i])
-break;
-curr_pos = i;
+
+/*Move to the next argument*/
+arg_index++;
 }
-i++;
+
+/*Get the next token*/
+token = strtok(NULL, " \t\n");
 }
-return (NULL);
 }
