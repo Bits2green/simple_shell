@@ -66,6 +66,17 @@ size_t print_linked_list(const list_t *head);
 list_t *find_node_starts_with(list_t *head, char *prefix, char next_char);
 ssize_t get_node_index_in_list(list_t *head, list_t *node);
 
+/*env.c*/
+int print_custom_env(info_t *info);
+char *get_custom_env_value(info_t *info, const char *name);
+int set_custom_env_var(info_t *info);
+int unset_custom_env_var(info_t *info);
+int populate_custom_env_list(info_t *info);
+
+/*_getenv.c*/
+char **copy_environ(info_t *info);
+int custom_unset_env_var(info_t *info, char *var);
+int custom_set_env_var(info_t *info, char *var, char *value);
 
 
 #endif
