@@ -26,6 +26,14 @@
 
 #define USE_GETLINE 0
 
+/*list_t*/
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
+
 /*command*/
 typedef struct builtin
 {
@@ -179,35 +187,5 @@ void check_chain(info_t *info, char *buffer, size_t *position, size_t start, siz
 int replace_command_alias(info_t *info);
 int replace_command_vars(info_t *info);
 int replace_string(char **old_str, char *new_str);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-typedef struct liststr
-{
-	int num;
-	char *str;
-	struct liststr *next;
-} list_t;
 
 #endif
