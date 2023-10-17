@@ -10,7 +10,7 @@ int main(int argc, char *argv[], char *envp[])
     int interactive = isatty(STDIN_FILENO); /*Check if running interactively*/
 
     /*Set up signal handler*/ 
-    signal(SIGINT, sigint_handler);
+    /*signal(SIGINT, sigint_handler);*/
 
     (void)argc, (void)argv;
 
