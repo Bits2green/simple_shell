@@ -10,7 +10,7 @@ char *get_shell_history_file(info_t *info)
 {
 char *home_dir, *history_file_path;
 
-home_dir = copy_environ(info, "HOME=");
+home_dir = get_custom_env_value(info, "HOME=");
 if (!home_dir)
 return (NULL);
 
@@ -142,7 +142,7 @@ list_t *node = NULL;
 if (info->shell_history)
 node = info->shell_history;
 
-add_node_end(&node, buffer, line_count);
+add_node_at_end(&node, buffer, line_count);
 
 if (!info->shell_history)
 info->shell_history = node;

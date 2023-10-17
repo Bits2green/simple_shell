@@ -6,7 +6,14 @@
 #define BUF_FLUSH -1
 
 #define SHELL_HIST_FILE ".simple_shell_history"
-#define HIST_MAX 4096
+#define SHELL_HIST_MAX 4096
+
+#define INFO_INIT                                                               \
+	{                                                                           \
+		NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+			0, 0, 0                                                             \
+	}
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,11 +46,10 @@ typedef struct builtin
 {
 	char *command;
 	int (*function)(info_t *);
-} 
-builtin_table;
+} builtin_table;
 
 /*info_t*/
-typedef struct passinfo
+typedef struct info_t
 {
 	char *arg;
 	char **command_argv;

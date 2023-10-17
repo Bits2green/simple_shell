@@ -23,7 +23,7 @@ signal(SIGINT, block_ctrl_c);
 #if USE_GETLINE
 bytes_read = getline(cmd_buffer, &cmd_buffer_len_temp, stdin);
 #else
-input_line(info, cmd_buffer, cmd_buffer_len_temp);
+input_line(info, cmd_buffer, &cmd_buffer_len_temp);
 #endif
 
 if (bytes_read > 0)
@@ -60,7 +60,7 @@ ssize_t get_input_line(info_t *info)
 static char *command_buffer; /* The ';' command chain buffer */
 static size_t cmd_buffer_iterator, cmd_buffer_index, cmd_buffer_len;
 ssize_t bytes_read = 0;
-char **command_buffer_ptr = &(info->arguments), *current_position;
+char **command_buffer_ptr = &(info->arg), *current_position;
 
 custom_putchar(BUF_FLUSH);
 bytes_read = buffer_command_chain(info, &command_buffer, &cmd_buffer_len);
