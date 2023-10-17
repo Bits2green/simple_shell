@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
 int interactive = isatty(STDIN_FILENO);
 char input[MAX_INPUT_SIZE];
-
+(void)argc; (void)argv;
 while (1)
 {
 if (interactive)
