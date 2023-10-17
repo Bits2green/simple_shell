@@ -86,4 +86,25 @@ char *find_executable_path(info_t *info, char *path_str, char *command);
 /*free.c*/
 int custom_free(void **ptr);
 
+/*strtoi.c*/
+int is_shell_interactive(info_t *info);
+int is_character_delimiter(char c, char *delimiters);
+int is_alphabetic(int c);
+int string_to_integer(char *s);
+
+/*shell_history.c*/
+char *get_shell_history_file(info_t *info);
+int write_shell_history(info_t *info);
+int read_shell_history(info_t *info);
+int build_shell_history_list(info_t *info, char *buffer, int line_count);
+int renumber_shell_history(info_t *info);
+
+/*readline.c*/
+ssize_t buffer_command_chain(info_t *info, char **cmd_buffer, size_t *cmd_buffer_len);
+ssize_t get_input_line(info_t *info);
+ssize_t read_buffer(info_t *info, char *buffer, size_t *buffer_length);
+int input_line(info_t *info, char **ptr, size_t *length);
+void block_ctrl_c(__attribute__((unused)) int signal_number);
+
+
 #endif
