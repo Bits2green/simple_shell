@@ -1,4 +1,5 @@
 #include "shell.h"
+<<<<<<< HEAD
 
 int main(int argc, char *argv[], char *envp[]) {
     char *input = NULL;
@@ -55,4 +56,32 @@ int main(int argc, char *argv[], char *envp[]) {
         }
     }
     return (0);
+=======
+/**
+* main - entry point
+* @argc: args
+* @argv: args list
+*
+* Return: 0
+*/
+int main(int argc, char *argv[])
+{
+int interactive = isatty(STDIN_FILENO);
+char input[MAX_INPUT_SIZE];
+(void)argc; (void)argv;
+while (1)
+{
+if (interactive)
+{
+printf("vcshell$ ");
+fflush(stdout); }
+if (fgets(input, sizeof(input), stdin) == NULL)
+{
+if (interactive)
+printf("\n");
+break; }
+}
+
+return (0);
+>>>>>>> 539537b932059b760d5831f91ae54583e50f4972
 }
