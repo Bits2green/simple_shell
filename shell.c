@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 (void)argv;
 (void)argc;
 
-signal(SIGINT, controlC);
+signal(SIGINT, controlD);
 runShell();
 
 return (0);
