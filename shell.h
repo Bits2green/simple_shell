@@ -112,6 +112,9 @@ int find_builtin_command(info_t *info);
 void find_executable_command(info_t *info);
 void execute_command(info_t *info);
 
+/*tokenize_input.c*/
+char **split_string(char *str, char *delimiters);
+char **split_string2(char *str, char delimiter);
 
 
 #endif
