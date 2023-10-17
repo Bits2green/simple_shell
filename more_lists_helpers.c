@@ -96,7 +96,7 @@ while (head)
 {
 p = starts_with(head->str, prefix);
 if (p && ((next_char == -1) || (*p == next_char)))
-return head;
+return (head);
 head = head->next;
 }
 return (NULL);
@@ -116,7 +116,7 @@ size_t index = 0;
 while (head)
 {
 if (head == node)
-return index;
+return (index);
 head = head->next;
 index++;
 }
