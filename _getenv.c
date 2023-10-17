@@ -10,7 +10,7 @@ char **copy_environ(info_t *info)
 {
 if (!info->custom_environ || info->env_changed)
 {
-info->custom_environ = linked_list_tocustom_strings(info->environment);
+info->custom_environ = linked_list_to_strings(info->environment);
 info->env_changed = 0;
 }
 
@@ -38,7 +38,7 @@ while (node)
 p = custom_starts_with(node->str, var);
 if (p && *p == '=')
 {
-info->env_changed = delete_node_at_index(&(info->environment), i);
+info->env_changed = delete_node_by_index(&(info->environment), i);
 i = 0;
 node = info->environment;
 continue;

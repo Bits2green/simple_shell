@@ -18,8 +18,8 @@ int my_exit(info_t *info)
 		{
 			info->status = 2;
 			custom_print_error(info, "Illegal number: ");
-			customcustom_eputs(info->command_argv[1]);
-			customcustom_eputchar('\n');
+			custom_eputs(info->command_argv[1]);
+			custom_eputchar('\n');
 			return (1);
 		}
 
@@ -44,28 +44,28 @@ int my_cd(info_t *info)
 
 	s = getcwd(buffer, 1024);
 	if (!s)
-		customcustom_puts("TODO: Handle getcwd failure here\n");
+		custom_puts("TODO: Handle getcwd failure here\n");
 
 	if (!info->command_argv[1])
 	{
-		dir = print_custom_env(info, "HOME=");
+		dir = copy_environ(info, "HOME=");
 		if (!dir)
-			chdir_ret = chdir((dir = print_custom_env(info, "PWD=")) ? dir : "/");
+			chdir_ret = chdir((dir = copy_environ(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
 	else if (custom_strcmp(info->command_argv[1], "-") == 0)
 	{
-		if (!print_custom_env(info, "OLDPWD="))
+		if (!copy_environ(info, "OLDPWD="))
 		{
 			custom_puts(s);
 			custom_putchar('\n');
 			return (1);
 		}
 
-		custom_puts(print_custom_env(info, "OLDPWD="));
+		custom_puts(copy_environ(info, "OLDPWD="));
 		custom_putchar('\n');
-		chdir_ret = chdir((dir = print_custom_env(info, "OLDPWD=")) ? dir : "/");
+		chdir_ret = chdir((dir = copy_environ(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 	{
@@ -80,7 +80,7 @@ int my_cd(info_t *info)
 	}
 	else
 	{
-		custom_set_env_var(info, "OLDPWD", print_custom_env(info, "PWD="));
+		custom_set_env_var(info, "OLDPWD", copy_environ(info, "PWD="));
 		custom_set_env_var(info, "PWD", getcwd(buffer, 1024));
 	}
 

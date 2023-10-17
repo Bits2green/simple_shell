@@ -39,7 +39,8 @@ typedef struct builtin
 {
 	char *command;
 	int (*function)(info_t *);
-} builtin_table;
+} 
+builtin_table;
 
 /*info_t*/
 typedef struct passinfo
@@ -58,7 +59,6 @@ typedef struct passinfo
 	char **custom_environ;
 	int env_changed;
 	int status;
-
 	char **command_chain_buffer;	  /* pointer to cmd ; chain buffer, for memory mangement */
 	int command_chain_type; /* CMD_type ||, &&, ; */
 	int readfd;
