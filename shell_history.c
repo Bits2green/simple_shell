@@ -10,11 +10,11 @@ char *get_shell_history_file(info_t *info)
 {
 char *home_dir, *history_file_path;
 
-home_dir = _getenv(info, "HOME=");
+home_dir = copy_environ(info, "HOME=");
 if (!home_dir)
 return (NULL);
 
-history_file_path = malloc(sizeof(char) * (_strlen(home_dir) + _strlen(SHELL_HIST_FILE) + 2));
+history_file_path = malloc(sizeof(char) * (custom_strlen(home_dir) + custom_strlen(SHELL_HIST_FILE) + 2));
 if (!history_file_path)
 {
 free(home_dir);
@@ -22,9 +22,9 @@ return (NULL);
 }
 
 history_file_path[0] = 0;
-_strcpy(history_file_path, home_dir);
-_strcat(history_file_path, "/");
-_strcat(history_file_path, SHELL_HIST_FILE);
+custom_strcpy(history_file_path, home_dir);
+custom_strcat(history_file_path, "/");
+custom_strcat(history_file_path, SHELL_HIST_FILE);
 
 free(home_dir);
 return (history_file_path);
@@ -53,11 +53,11 @@ return (-1);
 
 for (node = info->shell_history; node; node = node->next)
 {
-_putsfd(node->str, file_descriptor);
-_putfiledescriptor('\n', file_descriptor);
+custom_putsfd(node->str, file_descriptor);
+custom_putfd('\n', file_descriptor);
 }
 
-_putfiledescriptor(BUF_FLUSH, file_descriptor);
+custom_putfd(BUF_FLUSH, file_descriptor);
 close(file_descriptor);
 
 return (1);
@@ -121,7 +121,7 @@ free(buffer);
 info->shell_history_count = line_count;
 
 while (info->shell_history_count-- >= SHELL_HIST_MAX)
-delete_node_at_index(&(info->shell_history), 0);
+delete_node_by_index(&(info->shell_history), 0);
 
 renumber_shell_history(info);
 return (info->shell_history_count);

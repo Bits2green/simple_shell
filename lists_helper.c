@@ -19,12 +19,12 @@ new_node = malloc(sizeof(list_t));
 if (!new_node)
 return (NULL);
 
-_memset((void *)new_node, 0, sizeof(list_t));
+custom_memset((void *)new_node, 0, sizeof(list_t));
 new_node->num = index;
 
 if (data)
 {
-new_node->str = _strdup(data);
+new_node->str = custom_strdup(data);
 if (!new_node->str)
 {
 free(new_node);
@@ -56,12 +56,12 @@ new_node = malloc(sizeof(list_t));
 if (!new_node)
 return (NULL);
 
-_memset((void *)new_node, 0, sizeof(list_t));
+custom_memset((void *)new_node, 0, sizeof(list_t));
 new_node->num = index;
 
 if (data)
 {
-new_node->str = _strdup(data);
+new_node->str = custom_strdup(data);
 if (!new_node->str)
 {
 free(new_node);
@@ -91,8 +91,8 @@ size_t count = 0;
 
 while (head)
 {
-_puts(head->str ? head->str : "(nil)");
-_puts("\n");
+custom_puts(head->str ? head->str : "(nil)");
+custom_puts("\n");
 head = head->next;
 count++;
 }

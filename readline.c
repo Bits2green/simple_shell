@@ -20,7 +20,11 @@ free(*cmd_buffer);
 }
 
 signal(SIGINT, block_ctrl_c);
-bytes_read = input_line(cmd_buffer, &cmd_buffer_len_temp, stdin);
+#if USE_GETLINE
+bytes_read = getline(cmd_buffer, &cmd_buffer_len_temp, stdin);
+#else
+input_line(info, cmd_buffer, cmd_buffer_len_temp);
+#endif
 
 if (bytes_read > 0)
 {
@@ -31,11 +35,11 @@ bytes_read--;
 }
 
 info->linecount_flag = 1;
-remove_comments(*cmd_buffer);
+custom_remove_comments(*cmd_buffer);
 build_shell_history_list(info, *cmd_buffer, info->shell_history_count++);
 *cmd_buffer_len = bytes_read;
 
-if (_strchr(*cmd_buffer, ';')) /* Is this a command chain? */
+if (custom_strchr(*cmd_buffer, ';')) /* Is this a command chain? */
 {
 *cmd_buffer_len = bytes_read;
 info->command_chain_buffer = cmd_buffer;
@@ -58,7 +62,7 @@ static size_t cmd_buffer_iterator, cmd_buffer_index, cmd_buffer_len;
 ssize_t bytes_read = 0;
 char **command_buffer_ptr = &(info->arguments), *current_position;
 
-_putchar(BUF_FLUSH);
+custom_putchar(BUF_FLUSH);
 bytes_read = buffer_command_chain(info, &command_buffer, &cmd_buffer_len);
 
 if (bytes_read == -1) /* EOF */
@@ -69,11 +73,11 @@ if (cmd_buffer_len)
 cmd_buffer_index = cmd_buffer_iterator;
 current_position = command_buffer + cmd_buffer_iterator;
 
-check_command_chain(info, command_buffer, &cmd_buffer_index, cmd_buffer_iterator, cmd_buffer_len);
+check_chain(info, command_buffer, &cmd_buffer_index, cmd_buffer_iterator, cmd_buffer_len);
 
 while (cmd_buffer_index < cmd_buffer_len)
 {
-if (is_command_chain(info, command_buffer, &cmd_buffer_index))
+if (is_chain_delimiter(info, command_buffer, &cmd_buffer_index))
 break;
 
 cmd_buffer_index++;
@@ -84,7 +88,7 @@ cmd_buffer_iterator = cmd_buffer_index + 1;
 if (cmd_buffer_iterator >= cmd_buffer_len) /* Reached the end of the buffer? */
 {
 cmd_buffer_iterator = cmd_buffer_len = 0; /* Reset position and length */
-info->command_chain_type = CMD_NORMAL;
+info->command_chain_type = COMMAND_NORM;
 }
 
 *command_buffer_ptr = current_position; /* Pass back a pointer to the current command position */
@@ -148,10 +152,10 @@ bytes_read = read_buffer(info, buffer, &buffer_length);
 if (bytes_read == -1 || (bytes_read == 0 && buffer_length == 0))
 return (-1);
 
-position = _strchr(buffer + buffer_iterator, '\n');
+position = custom_strchr(buffer + buffer_iterator, '\n');
 buffer_size = position ? 1 + (size_t)(position - buffer) : buffer_length;
 
-new_position = _realloc(current, line_length, line_length ? line_length + buffer_size : buffer_size + 1);
+new_position = custom_realloc(current, line_length, line_length ? line_length + buffer_size : buffer_size + 1);
 
 if (!new_position)
 {
@@ -163,11 +167,11 @@ return (-1);
 
 if (line_length)
 {
-_strncat(new_position, buffer + buffer_iterator, buffer_size - buffer_iterator);
+custom_strncat(new_position, buffer + buffer_iterator, buffer_size - buffer_iterator);
 }
 else
 {
-_strncpy(new_position, buffer + buffer_iterator, buffer_size - buffer_iterator + 1);
+custom_strncpy(new_position, buffer + buffer_iterator, buffer_size - buffer_iterator + 1);
 }
 
 line_length += buffer_size - buffer_iterator;

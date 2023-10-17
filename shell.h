@@ -1,6 +1,13 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
+
+#define SHELL_HIST_FILE ".simple_shell_history"
+#define HIST_MAX 4096
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,12 +24,16 @@
 #define COMMAND_AND 2
 #define COMMAND_CHAIN 3
 
+#define USE_GETLINE 0
+
+/*command*/
 typedef struct builtin
 {
-	char *type;
-	int (*func)(info_t *);
+	char *command;
+	int (*function)(info_t *);
 } builtin_table;
 
+/*info_t*/
 typedef struct passinfo
 {
 	char *arg;
