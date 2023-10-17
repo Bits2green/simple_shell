@@ -1,11 +1,6 @@
 #include "shell.h"
 
 /**
- * Syntax analysis is the process of analyzing a string of symbols,
- * either in natural language, computer languages or data structures.
- */
-
-/**
  * is_executable - determines if a file is an executable command
  * @info: the info struct
  * @path: path to the file
@@ -18,11 +13,11 @@ int is_executable(info_t *info, char *path)
 
     (void)info;
     if (!path || stat(path, &file_stat) != 0)
-        return 0;
+        return (0);
 
     if (S_ISREG(file_stat.st_mode))
-        return 1;
-    return 0;
+        return (1);
+    return (0);
 }
 
 /**
@@ -44,7 +39,7 @@ char *copy_chars(char *src, int start, int stop)
             buffer[k++] = src[i];
     }
     buffer[k] = 0;
-    return buffer;
+    return (buffer);
 }
 
 /**
@@ -61,11 +56,11 @@ char *find_executable_path(info_t *info, char *path_str, char *command)
     char *path;
 
     if (!path_str)
-        return NULL;
+        return (NULL);
     if (_strlen(command) > 2 && starts_with(command, "./"))
     {
         if (is_executable(info, command))
-            return command;
+            return (command);
     }
     while (1)
     {
@@ -80,12 +75,12 @@ char *find_executable_path(info_t *info, char *path_str, char *command)
                 _strcat(path, command);
             }
             if (is_executable(info, path))
-                return path;
+                return (path);
             if (!path_str[i])
                 break;
             curr_pos = i;
         }
         i++;
     }
-    return NULL;
+    return (NULL);
 }

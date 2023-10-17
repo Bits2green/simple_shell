@@ -78,5 +78,12 @@ char **copy_environ(info_t *info);
 int custom_unset_env_var(info_t *info, char *var);
 int custom_set_env_var(info_t *info, char *var, char *value);
 
+/*_parse_input.c*/
+int is_executable(info_t *info, char *path);
+char *copy_chars(char *src, int start, int stop);
+char *find_executable_path(info_t *info, char *path_str, char *command);
+
+/*free.c*/
+int custom_free(void **ptr);
 
 #endif
