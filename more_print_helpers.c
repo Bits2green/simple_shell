@@ -112,37 +112,36 @@ sign = '-';
 }
 
 array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
-    ptr = &buffer[49];
-    *ptr = '\0';
+ptr = &buffer[49];
+*ptr = '\0';
 
-    do
-    {
-        *--ptr = array[n % base];
-        n /= base;
-    } while (n != 0);
+do {
+*--ptr = array[n % base];
+n /= base;
+} while (n != 0);
 
-    if (sign)
-        *--ptr = sign;
-    
-    return ptr;
+if (sign)
+*--ptr = sign;
+
+return (ptr);
 }
 
 /**
- * custom_remove_comments - Replaces the first instance of '#' with '\0'.
- * @buf: Address of the string to modify.
- *
- * Return: Always 0.
- */
+* custom_remove_comments - Replaces the first instance of '#' with '\0'.
+* @buf: Address of the string to modify.
+*
+* Return: Always 0.
+*/
 void custom_remove_comments(char *buf)
 {
-    int i;
+int i;
 
-    for (i = 0; buf[i] != '\0'; i++)
-    {
-        if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
-        {
-            buf[i] = '\0';
-            break;
-        }
-    }
+for (i = 0; buf[i] != '\0'; i++)
+{
+if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
+{
+buf[i] = '\0';
+break;
+}
+}
 }
