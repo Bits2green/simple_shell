@@ -100,7 +100,7 @@ read_length = read(file_descriptor, buffer, file_size);
 buffer[file_size] = 0;
 
 if (read_length <= 0)
-return free(buffer), 0;
+return (free(buffer), 0);
 
 close(file_descriptor);
 

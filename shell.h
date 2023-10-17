@@ -106,5 +106,12 @@ ssize_t read_buffer(info_t *info, char *buffer, size_t *buffer_length);
 int input_line(info_t *info, char **ptr, size_t *length);
 void block_ctrl_c(__attribute__((unused)) int signal_number);
 
+/*loosmsh.c*/
+int run_shell(info_t *info, char **av);
+int find_builtin_command(info_t *info);
+void find_executable_command(info_t *info);
+void execute_command(info_t *info);
+
+
 
 #endif

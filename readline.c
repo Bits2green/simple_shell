@@ -62,7 +62,7 @@ _putchar(BUF_FLUSH);
 bytes_read = buffer_command_chain(info, &command_buffer, &cmd_buffer_len);
 
 if (bytes_read == -1) /* EOF */
-return -1;
+return (-1);
 
 if (cmd_buffer_len)
 {
@@ -108,7 +108,7 @@ ssize_t read_buffer(info_t *info, char *buffer, size_t *buffer_length)
 ssize_t bytes_read = 0;
 
 if (*buffer_length)
-return 0;
+return (0);
 
 bytes_read = read(info->readfd, buffer, READ_BUF_SIZE);
 
@@ -158,7 +158,7 @@ if (!new_position)
 if (current)
 free(current);
 
-return -1;
+return (-1);
 }
 
 if (line_length)
@@ -178,7 +178,7 @@ if (length)
 *length = line_length;
 
 *ptr = current;
-return line_length;
+return (line_length);
 }
 
 /**
