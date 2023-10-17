@@ -7,7 +7,7 @@ int execute_command_with_path(struct Command *command, char **envp) {
     pid_t current_child_pid;
     char *token;
     char *path = custom_getenv("PATH", envp);
-    char *const args[] = {NULL, NULL};
+    char *args[] = {NULL, NULL};
 
     if (path == NULL) {
         my_printf("PATH environment variable not set.\n");
