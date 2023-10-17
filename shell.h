@@ -26,7 +26,7 @@ int startsWithSlash(char *input);
 int isExitCommand(char *userInput, char *exitCommand);
 int isEnvCommand(char *userInput, char *envCommand);
 char **parseInput(char *input);
-void handleCtrlC(int signal);
+void controlC(int signal);
 
 /*shell_prompt.c*/
 void runShell(void);
