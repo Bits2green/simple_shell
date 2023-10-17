@@ -86,7 +86,7 @@ tokens[tokenIndex] = token;
 tokenIndex++;
 token = strtok(NULL, delimiter);
 }
-executeProcess(tokens);
+executeCommand(tokens);
 return (tokens);
 }
 

@@ -8,7 +8,7 @@ void executeCommand(char **command)
 {
 char *parameter = command[1];
 char *searchPath;
-char *executablePath;
+/*char *executablePath;*/
 char *slash = "/";
 char *tempPath;
 

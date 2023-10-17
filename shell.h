@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <limits.h>
 #include <string.h>
+#include <signal.h>
 
 extern char **environment;
 
