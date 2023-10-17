@@ -94,7 +94,7 @@ return (tokens);
 * handleCtrlC - Prevents the shell from closing on Ctrl+C.
 * @signal: Signal to handle
 */
-void handleCtrlC(int signal)
+void controlC(int signal)
 {
 (void) signal;
 write(1, "\n$ ", 3);

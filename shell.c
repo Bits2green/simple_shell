@@ -1,7 +1,5 @@
 #include "shell.h"
 
-void controlC(int signal);
-
 /**
 * main - func with infinite loop
 * @argc: argument to main
