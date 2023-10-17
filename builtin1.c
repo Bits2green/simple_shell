@@ -12,7 +12,7 @@ int my_exit(info_t *info)
 
 	if (info->command_argv[1])
 	{
-		exit_status = _atoi(info->command_argv[1]);
+		exit_status = custom_erratoi(info->command_argv[1]);
 
 		if (exit_status == -1)
 		{
