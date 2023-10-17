@@ -11,7 +11,7 @@
 
 void parse_input(char *input, struct Command *command, char **envp) {
 
-    int i;
+    size_t i;
     char *token;
     int arg_index = 0;
     int is_command_name_set;
