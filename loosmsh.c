@@ -99,7 +99,7 @@ k++;
 if (!k)
 return;
 
-path = find_command_in_path(info, _getenv(info, "PATH="), info->argv[0]);
+path = find_command_in_path(info, get_custom_env_value(info, "PATH="), info->argv[0]);
 if (path)
 {
 info->path = path;
@@ -107,7 +107,7 @@ execute_command(info);
 }
 else
 {
-if ((is_interactive(info) || _getenv(info, "PATH=") || info->argv[0][0] == '/') && is_command(info, info->argv[0]))
+if ((is_interactive(info) || get_custom_env_value(info, "PATH=") || info->argv[0][0] == '/') && is_command(info, info->argv[0]))
 execute_command(info);
 else if (*(info->arg) != '\n')
 {
@@ -150,7 +150,7 @@ if (WIFEXITED(info->status))
 {
 info->status = WEXITSTATUS(info->status);
 if (info->status == 126)
-print_error(info, "Permission denied\n");
+custom_print_error(info, "Permission denied\n");
 }
 }
 }

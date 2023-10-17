@@ -26,11 +26,11 @@ if (errno == EACCES)
 exit(126);
 if (errno == ENOENT)
 {
-_eputs(argv[0]);
-_eputs(": 0: Can't open ");
-_eputs(argv[1]);
-_eputchar('\n');
-_eputchar(BUF_FLUSH);
+custom_eputs(argv[0]);
+custom_eputs(": 0: Can't open ");
+custom_eputs(argv[1]);
+custom_eputchar('\n');
+custom_eputchar(BUF_FLUSH);
 exit(127);
 }
 return (EXIT_FAILURE);

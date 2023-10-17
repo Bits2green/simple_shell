@@ -116,5 +116,23 @@ void execute_command(info_t *info);
 char **split_string(char *str, char *delimiters);
 char **split_string2(char *str, char delimiter);
 
+/*helper_variables.c*/
+int is_chain_delimiter(info_t *info, char *buffer, size_t *position);
+void check_chain(info_t *info, char *buffer, size_t *position, size_t start, size_t length);
+int replace_command_alias(info_t *info);
+int replace_command_vars(info_t *info);
+int replace_string(char **old_str, char *new_str);
+
+/*builtins1.c*/
+int my_exit(info_t *info);
+int my_cd(info_t *info);
+int my_help(info_t *info);
+
+/*builtins2.c*/
+int my_history(info_t *info);
+int unset_alias(info_t *info, char *str);
+int set_alias(info_t *info, char *str);
+int print_alias(list_t *node);
+int my_alias(info_t *info);
 
 #endif

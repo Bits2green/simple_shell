@@ -48,7 +48,7 @@ if (info->argc != 3)
 custom_eputs("Incorrect number of arguments\n");
 return (1);
 }
-if (set_custom_env(info, info->argv[1], info->argv[2]))
+if (custom_set_env_var(info, info->argv[1], info->argv[2]))
 return (0);
 return (1);
 }
@@ -69,7 +69,7 @@ custom_eputs("Too few arguments.\n");
 return (1);
 }
 for (i = 1; i <= info->argc; i++)
-unset_custom_env(info, info->argv[i]);
+custom_unset_env_var(info, info->argv[i]);
 
 return (0);
 }

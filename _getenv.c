@@ -10,7 +10,7 @@ char **copy_environ(info_t *info)
 {
 if (!info->custom_environ || info->env_changed)
 {
-info->custom_environ = list_to_strings(info->custom_env_list);
+info->custom_environ = linked_list_tocustom_strings(info->custom_env_list);
 info->env_changed = 0;
 }
 
@@ -35,10 +35,10 @@ return (0);
 
 while (node)
 {
-p = starts_with(node->str, var);
+p = customcustom_starts_with(node->str, var);
 if (p && *p == '=')
 {
-info->env_changed = delete_node_at_index(&(info->custom_env_list), i);
+info->env_changed = delete_node_by_index(&(info->custom_env_list), i);
 i = 0;
 node = info->custom_env_list;
 continue;
@@ -50,7 +50,7 @@ return (info->env_changed);
 }
 
 /**
-* custom_set_env_var - Initialize a new custom environment variable,
+* customcustom_set_env_var - Initialize a new custom environment variable,
 *             or modify an existing one
 * @info: Structure containing potential arguments. Used to maintain
 *        constant function prototype.
@@ -58,7 +58,7 @@ return (info->env_changed);
 * @value: the string custom environment variable value
 *  Return: Always 0
 */
-int custom_set_env_var(info_t *info, char *var, char *value)
+int customcustom_set_env_var(info_t *info, char *var, char *value)
 {
 char *buf = NULL;
 list_t *node;
@@ -67,16 +67,16 @@ char *p;
 if (!var || !value)
 return (0);
 
-buf = malloc(_strlen(var) + _strlen(value) + 2);
+buf = malloc(custom_strlen(var) + custom_strlen(value) + 2);
 if (!buf)
 return (1);
-_strncpy(buf, var, _strlen(var) + _strlen(value) + 2);
-_strcat(buf, "=");
-_strcat(buf, value);
+custom_strncpy(buf, var, custom_strlen(var) + custom_strlen(value) + 2);
+custom_strcat(buf, "=");
+custom_strcat(buf, value);
 node = info->custom_env_list;
 while (node)
 {
-p = starts_with(node->str, var);
+p = custom_starts_with(node->str, var);
 if (p && *p == '=')
 {
 free(node->str);
@@ -86,7 +86,7 @@ return (0);
 }
 node = node->next;
 }
-add_node_end(&(info->custom_env_list), buf, 0);
+add_node_at_end(&(info->custom_env_list), buf, 0);
 free(buf);
 info->env_changed = 1;
 return (0);

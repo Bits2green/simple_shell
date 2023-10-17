@@ -9,13 +9,13 @@
 */
 int is_executable(info_t *info, char *path)
 {
-struct stat file_stat;
+struct stat filecustom_stat;
 
 (void)info;
-if (!path || stat(path, &file_stat) != 0)
+if (!path || stat(path, &filecustom_stat) != 0)
 return (0);
 
-if (S_ISREG(file_stat.st_mode))
+if (S_ISREG(filecustom_stat.st_mode))
 return (1);
 return (0);
 }
@@ -46,38 +46,38 @@ return (buffer);
 * find_executable_path - finds full path
 * of a command in the PATH environment variable
 * @info: the info struct
-* @path_str: the PATH string
+* @pathcustom_str: the PATH string
 * @command: the command to find
 *
 * Return: full path of the command if found, or NULL
 */
-char *find_executable_path(info_t *info, char *path_str, char *command)
+char *find_executable_path(info_t *info, char *pathcustom_str, char *command)
 {
 int i = 0, curr_pos = 0;
 char *path;
 
-if (!path_str)
+if (!pathcustom_str)
 return (NULL);
-if (_strlen(command) > 2 && starts_with(command, "./"))
+if (custom_strlen(command) > 2 && custom_starts_with(command, "./"))
 {
 if (is_executable(info, command))
 return (command);
 }
 while (1)
 {
-if (!path_str[i] || path_str[i] == ':')
+if (!pathcustom_str[i] || pathcustom_str[i] == ':')
 {
-path = copy_chars(path_str, curr_pos, i);
+path = copy_chars(pathcustom_str, curr_pos, i);
 if (!*path)
-_strcat(path, command);
+custom_strcat(path, command);
 else
 {
-_strcat(path, "/");
-_strcat(path, command);
+custom_strcat(path, "/");
+custom_strcat(path, command);
 }
 if (is_executable(info, path))
 return (path);
-if (!path_str[i])
+if (!pathcustom_str[i])
 break;
 curr_pos = i;
 }
