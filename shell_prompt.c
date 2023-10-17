@@ -22,17 +22,17 @@ if (isEnvCommand(inputLine, "env") == 0)
 {
 while (*environment != NULL)
 {
-if (!startsWithSlash(*environment, "USER") ||
-!startsWithSlash(*environment, "LANGUAGE") ||
-!startsWithSlash(*environment, "SESSION") ||
-!startsWithSlash(*environment, "COMPIZ_CONFIG_PROFILE") ||
-!startsWithSlash(*environment, "SHLV") ||
-!startsWithSlash(*environment, "HOME") ||
-!startsWithSlash(*environment, "C_IS") ||
-!startsWithSlash(*environment, "DESKTOP_SESSION") ||
-!startsWithSlash(*environment, "LOGNAME") ||
-!startsWithSlash(*environment, "TERM") ||
-!startsWithSlash(*environment, "PATH"))
+if (!compare_strings(*environment, "USER") ||
+!compare_strings(*environment, "LANGUAGE") ||
+!compare_strings(*environment, "SESSION") ||
+!compare_strings(*environment, "COMPIZ_CONFIG_PROFILE") ||
+!compare_strings(*environment, "SHLV") ||
+!compare_strings(*environment, "HOME") ||
+!compare_strings(*environment, "C_IS") ||
+!compare_strings(*environment, "DESKTOP_SESSION") ||
+!compare_strings(*environment, "LOGNAME") ||
+!compare_strings(*environment, "TERM") ||
+!compare_strings(*environment, "PATH"))
 {
 print_string(*environment);
 print_string("\n");

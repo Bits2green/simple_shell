@@ -12,7 +12,7 @@
 #include <limits.h>
 #include <string.h>
 
-extern char **environ;
+extern char **environment;
 
 int compare_strings(char *str1, char *str2);
 int write_char(char ch);

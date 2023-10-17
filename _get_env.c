@@ -16,11 +16,11 @@ char **pathEnvironment = malloc(sizeof(char) * 1024);
 char **pathSegments = malloc(sizeof(char) * 1024);
 int i;
 
-while (*environ != NULL)
+while (*environment != NULL)
 {
-if (!compare_strings(*environ))
+if (!compare_strings(*environment, "PATH"))
 {
-*pathEnvironment = *environ;
+*pathEnvironment = *environment;
 for (i = 0; i < 9; i++, pathSegments++, pathEnvironment++)
 {
 *pathSegments = strtok(*pathEnvironment, ":");
@@ -44,7 +44,7 @@ perror("Error");
 }
 }
 }
-environ++;
+environment++;
 }
 return ("Error: Not Found");
 }
