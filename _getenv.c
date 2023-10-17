@@ -26,7 +26,7 @@ return (info->custom_environ);
 */
 int custom_unset_env_var(info_t *info, char *var)
 {
-list_t *node = info->custom_env_list;
+list_t *node = info->environment;
 size_t i = 0;
 char *p;
 
@@ -35,12 +35,12 @@ return (0);
 
 while (node)
 {
-p = customcustom_starts_with(node->str, var);
+p = custom_starts_with(node->str, var);
 if (p && *p == '=')
 {
-info->env_changed = delete_node_by_index(&(info->custom_env_list), i);
+info->env_changed = delete_node_by_index(&(info->environment), i);
 i = 0;
-node = info->custom_env_list;
+node = info->environment;
 continue;
 }
 node = node->next;
@@ -58,7 +58,7 @@ return (info->env_changed);
 * @value: the string custom environment variable value
 *  Return: Always 0
 */
-int customcustom_set_env_var(info_t *info, char *var, char *value)
+int custom_set_env_var(info_t *info, char *var, char *value)
 {
 char *buf = NULL;
 list_t *node;
@@ -73,7 +73,7 @@ return (1);
 custom_strncpy(buf, var, custom_strlen(var) + custom_strlen(value) + 2);
 custom_strcat(buf, "=");
 custom_strcat(buf, value);
-node = info->custom_env_list;
+node = info->environment;
 while (node)
 {
 p = custom_starts_with(node->str, var);
@@ -86,7 +86,7 @@ return (0);
 }
 node = node->next;
 }
-add_node_at_end(&(info->custom_env_list), buf, 0);
+add_node_at_end(&(info->environment), buf, 0);
 free(buf);
 info->env_changed = 1;
 return (0);

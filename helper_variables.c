@@ -90,7 +90,7 @@ int replace_command_alias(info_t *info)
             return (0);
         }
         free(info->command_argv[0]);
-        p = strchr(node->str, '=');
+        p = custom_strchr(node->str, '=');
         if (!p)
         {
             return (0);

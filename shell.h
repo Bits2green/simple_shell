@@ -12,6 +12,34 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#define COMMAND_NORM 0
+#define COMMAND_OR 1
+#define COMMAND_AND 2
+#define COMMAND_CHAIN 3
+
+typedef struct passinfo
+{
+	char *arg;
+	char **command_argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	list_t *environment;
+	list_t *shell_history;
+	list_t *alias;
+	char **custom_environ;
+	int env_changed;
+	int status;
+
+	char **command_chain_buffer;	  /* pointer to cmd ; chain buffer, for memory mangement */
+	int command_chain_type; /* CMD_type ||, &&, ; */
+	int readfd;
+	int shell_history_count;
+} info_t;
+
 /*print_helpers.c*/
 void custom_eputs(char *str);
 int custom_eputchar(char c);
@@ -134,5 +162,12 @@ int unset_alias(info_t *info, char *str);
 int set_alias(info_t *info, char *str);
 int print_alias(list_t *node);
 int my_alias(info_t *info);
+
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
 
 #endif

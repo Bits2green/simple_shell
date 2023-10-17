@@ -41,7 +41,7 @@ custom_eputs(info->fname);
 custom_eputs(": ");
 custom_print_d(info->line_count, STDERR_FILENO);
 custom_eputs(": ");
-custom_eputs(info->argv[0]);
+custom_eputs(info->command_argv[0]);
 custom_eputs(": ");
 custom_eputs(estr);
 }

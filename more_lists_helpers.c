@@ -69,7 +69,7 @@ size_t count = 0;
 
 while (head)
 {
-custom_putsonvert_number(head->num, 10, 0));
+custom_puts(custom_convert_number(head->num, 10, 0));
 custom_putchar(':');
 custom_putchar(' ');
 custom_puts(head->str ? head->str : "(nil)");

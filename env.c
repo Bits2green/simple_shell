@@ -8,7 +8,7 @@
 */
 int print_custom_env(info_t *info)
 {
-print_linked_list_str(info->custom_env_list);
+print_linked_list_str(info->environment);
 return (0);
 }
 
@@ -21,7 +21,7 @@ return (0);
 */
 char *get_custom_env_value(info_t *info, const char *name)
 {
-list_t *node = info->custom_env_list;
+list_t *node = info->environment;
 char *p;
 
 while (node)
@@ -48,7 +48,7 @@ if (info->argc != 3)
 custom_eputs("Incorrect number of arguments\n");
 return (1);
 }
-if (custom_set_env_var(info, info->argv[1], info->argv[2]))
+if (custom_set_env_var(info, info->command_argv[1], info->command_argv[2]))
 return (0);
 return (1);
 }
@@ -69,7 +69,7 @@ custom_eputs("Too few arguments.\n");
 return (1);
 }
 for (i = 1; i <= info->argc; i++)
-custom_unset_env_var(info, info->argv[i]);
+custom_unset_env_var(info, info->command_command_argv[i]);
 
 return (0);
 }
@@ -87,6 +87,6 @@ size_t i;
 
 for (i = 0; info->custom_environ[i]; i++)
 add_node_at_end(&node, info->custom_environ[i], 0);
-info->custom_env_list = node;
+info->environment = node;
 return (0);
 }

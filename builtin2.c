@@ -103,13 +103,13 @@ int my_alias(info_t *info)
 		return (0);
 	}
 
-	for (i = 1; info->argv[i]; i++)
+	for (i = 1; info->command_argv[i]; i++)
 	{
-		p = _strchr(info->argv[i], '=');
+		p = _strchr(info->command_argv[i], '=');
 		if (p)
-			set_alias(info, info->argv[i]);
+			set_alias(info, info->command_argv[i]);
 		else
-			print_alias(node_starts_with(info->alias, info->argv[i], '='));
+			print_alias(node_starts_with(info->alias, info->command_argv[i], '='));
 	}
 
 	return (0);
