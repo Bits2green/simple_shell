@@ -7,6 +7,7 @@ int execute_command_with_path(struct Command *command, char **envp) {
     pid_t current_child_pid;
     char *token;
     char *path = custom_getenv("PATH", envp);
+    char *const args[] = {NULL, NULL};
 
     if (path == NULL) {
         my_printf("PATH environment variable not set.\n");
@@ -26,7 +27,7 @@ int execute_command_with_path(struct Command *command, char **envp) {
             /*Execute the program*/
             current_child_pid = fork();
             if (current_child_pid == 0) {
-                char *const args[] = {command->name, NULL};
+                args[0] = command->name;
                 execve(full_path, args, envp);
                 perror("execve failed");
                 _exit(1);
