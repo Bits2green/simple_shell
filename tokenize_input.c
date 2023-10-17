@@ -17,7 +17,8 @@ return (NULL);
 if (!delimiters)
 delimiters = " ";
 
-for (i = 0; str[i] != '\0'; i++) {
+for (i = 0; str[i] != '\0'; i++)
+{
 if (!is_delimiter(str[i], delimiters) &&
 (is_delimiter(str[i + 1], delimiters) || !str[i + 1]))
 num_words++;
@@ -71,7 +72,8 @@ char **words;
 if (str == NULL || str[0] == 0)
 return (NULL);
 
-for (i = 0; str[i] != '\0'; i++) {
+for (i = 0; str[i] != '\0'; i++)
+{
 if ((str[i] != delimiter && str[i + 1] == delimiter) ||
 (str[i] != delimiter && !str[i + 1]) || str[i + 1] == delimiter)
 num_words++;
