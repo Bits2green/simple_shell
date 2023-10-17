@@ -35,17 +35,12 @@ if (!compare_strings(*environment, "USER") ||
 !compare_strings(*environment, "PATH"))
 {
 print_string(*environment);
-print_string("\n");
-}
-environment++;
-}
-}
+print_string("\n"); }
+environment++; } }
 childPid = fork();
 if (childPid < 0)
 perror("Error");
 if (childPid == 0)
 parseInput(inputLine);
 else
-wait(&childStatus);
-}
-}
+wait(&childStatus); } }

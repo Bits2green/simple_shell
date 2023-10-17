@@ -91,7 +91,7 @@ return (tokens);
 }
 
 /**
-* handleCtrlC - Prevents the shell from closing on Ctrl+C.
+* controlD - Prevents the shell from closing on Ctrl+C.
 * @signal: Signal to handle
 */
 void controlD(int signal)
