@@ -15,7 +15,7 @@
 
 char **tokenize(char *line);
 
-int _run(char **cmd, char **argv);
+/*int _run(char **cmd, char **argv);*/
 char *readLine(void);
 
 /*strings.c*/
