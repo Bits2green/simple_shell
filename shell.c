@@ -10,10 +10,8 @@
 int main(int ac, char **argv)
 {
     char *line = NULL, **cmd = NULL;
-    int i;
     int status = 0;
     (void)ac;
-    (void)argv;
 
     while (1)
     {
@@ -29,8 +27,6 @@ int main(int ac, char **argv)
         if (!cmd)
             continue;
         
-        for (i = 0; cmd[i]; i++)
-            printf("%s\n", cmd[i]);
-        /*status = _run(cmd, argv);*/
+        status = _run(cmd, argv);
     }
 }
