@@ -12,13 +12,14 @@
 #include <fcntl.h>
 
 #define DELIM " \t\n"
-#define char **environ;
+
+extern char **environ;
 
 char **tokenize(char *line);
 
 int _run(char **cmd, char **argv);
 char *readLine(void);
-void free_string_array(char **array)
+void free_string_array(char **array);
 
 /*strings.c*/
 char *_strcpy(char *dest, char *src);
