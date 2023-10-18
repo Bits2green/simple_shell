@@ -40,6 +40,4 @@ char **tokenize(char *line)
     }
     free(line), line = NULL;
     cmd[i] = NULL;
-    return (cmd);
-
-}
+    return (cmd); }

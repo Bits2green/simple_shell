@@ -1,10 +1,10 @@
 #include "sshell.h"
 
 /**
- * main - 
- * @ac:
- * @av:
- * Return:
+ * main - Entry point
+ * @ac: - Args count
+ * @argv: Arguments
+ * Return: 0
 */
 
 int main(int ac, char **argv)
