@@ -33,12 +33,12 @@
 #define USE_STRTOK 0
 #define HIST_FILE_NAME ".ss_history"
 #define HIST_SIZE_MAX 4096
+
 #define SET_INFO
-    {										\
-		NULL, NULL, NULL, 0, 0, 0, 0,		\
-		NULL, NULL, NULL, NULL, NULL,		\
-		0, 0, NULL, 0, 0, 0					\
-	}
+    {                                                                           \
+		NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+			0, 0, 0                                                             \
+	}                                                                           \     
 
 extern char **environ;
 
