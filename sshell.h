@@ -13,7 +13,7 @@
 
 #define DELIM " \t\n"
 
-char **tokenize(char *line)
+char **tokenize(char *line);
 
 int _run(char **cmd, char **argv);
 char *readLine(void);
