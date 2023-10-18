@@ -1,78 +1,48 @@
 #include "shell.h"
-
-int main(int argc, char *argv[], char *envp[])
+/**
+ * main - Entry point to shell program
+ * @argc: Number of arguments passed into the shell executable.
+ * @argv: Vector containing arguments passed.
+ *
+ * Return: 0 on success or 1 on failure.
+ */
+int main(int argc, char **argv)
 {
-char *input = NULL;
-size_t input_size = 0;
-ssize_t read_size;
-struct Command command;
-int i;
-int interactive = isatty(STDIN_FILENO); /*Check if running interactively*/
+	info_s info[] = {SET_INFO};
+	int fd = 2;
 
-/*Set up signal handler*/
-/*signal(SIGINT, sigint_handler);*/
+	asm("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r"(fd)
+		: "r"(fd));
 
-(void)argc, (void)argv;
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+		{
+			if (errno == EACCES)
+				exit(126);
 
-while (1) {
-if (interactive) {
-my_printf("smshell$ ");
-fflush(stdout);
-}
+			if (errno == ENOENT)
+			{
+				puts_err(argv[0]);
+				puts_err(": 0: Can't open ");
+				puts_err(argv[1]);
+				putchar_err('\n');
+				putchar_err(NEG_ONE);
+				exit(127);
+			}
 
-read_size = getline(&input, &input_size, stdin);
+			return (EXIT_FAILURE);
+		}
 
-if (read_size == -1) {
-/* Handle Ctrl+D or input error */
-if (interactive) {
-my_printf("\n");
-}
-free(input);
-break;
-}
+		info->fd_read = fd;
+	}
 
-/* Tokenize and parse input here*/
-parse_input(input, &command, envp);
+	gather_env(info);
+	read_history(info);
+	shell_main(info, argv);
 
-/*Execute commands*/
-if (command.name != NULL) {
-/*Expand environment variables in command arguments*/
-parse_input(input, &command, envp);
-
-if (my_strcmp(command.name, "cd") == 0) {
-/*Handle 'cd' as a built-in command*/
-if (chdir(command.args[0]) == -1) {
-my_printf("./vcsh: Failed to change directory\n");
-}
-} else if (my_strcmp(command.name, "exit") == 0) {
-/*Handle 'exit' as a built-in command to exit the shell*/
-exit_shell();
-} else if (my_strcmp(command.name, "env") == 0) {
-/*Handle 'env' as a built-in command to print environment variables*/
-print_environment(envp);
-} else {
-/*Execute external commands using the PATH*/
-if(execute_command_with_path(&command, envp) == -1) {
-/*Command not found in PATH*/
-my_printf("./vcsh: Command not found.\n");
-}
-}
-}
-/*Handle built-in commands (e.g., "cd")*/
-if (input != NULL) { /*Check if memory is not already freed*/
-free(input); /*Free the dynamically allocated input buffer*/
-input = NULL; /*Set to NULL to avoid double freeing*/
-}
-
-/*Free dynamically allocated memory in the command struct*/
-if (command.name != NULL) {
-free(command.name);
-for (i = 0; command.args[i] != NULL; i++) {
-free(command.args[i]);
-}
-/*Reset the command struct*/
-memset(&command, 0, sizeof(struct Command));
-}
-}
-return (0);
+	return (EXIT_SUCCESS);
 }
