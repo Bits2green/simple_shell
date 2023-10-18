@@ -1,65 +1,59 @@
 #include "sshell.h"
 
-int _strdup(const char *str)
+char *_strdup(const char *str)
 {
-    char ptr;
-    int i, len = 0;
+	int length = 0;
+	char *ret;
 
-    if (str == NULL)
-        return (NULL);
-    while (*str != '\0')
-    {
-        len++;
-        str++;
-    }
-    str = str - len;
-    ptr = malloc(sizeof(char) * (len +1 ));
-    if (ptr == NULL)
-        return (NULL);
-    for (i = 0; i <= len; i++)
-        ptr[i] = str[i];
-    return (ptr);
+	if (str == NULL)
+		return (NULL);
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
+		return (NULL);
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
 
 int _strcmp(char *s1, char *s2)
 {
-    int cmpr;
-
-    cmpr = (int)*s1 - (int)*s2;
-    while (*s1)
-    {
-        if (*s1 != *s2)
-            break;
-        s1++;
-        s2++;
-        cmpr = (int)*s1 - (int)*s2;
-    }
-    return (cmpr);   
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
 
 int _strlen(char *s)
 {
-    int len = 0;
+	int i = 0;
 
-    while (s[len])
-        len++;
-    return (len);
+	if (!s)
+		return (0);
+
+	while (*s++)
+		i++;
+	return (i);
 }
 
 char *_strcat(char *dest, char *src)
 {
-    char *p = dest;
+	char *ret = dest;
 
-    while (*p)
-        p++;
-    while (*src)
-    {
-        *p = *src;
-        p++;
-        src++;
-    }
-    *p = *src;
-    return (dest);
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (ret);
 }
 
 char *_strcpy(char *dest, char *src)

@@ -2,8 +2,8 @@
 
 char **tokenize(char *line)
 {
-    char *token = NULL, tmp = NULL;
-    char *cmd = NULL;
+    char *token = NULL, *tmp = NULL;
+    char **cmd = NULL;
     int cpt = 0, i = 0;
 
     if (!line)

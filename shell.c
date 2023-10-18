@@ -9,8 +9,9 @@
 
 int main(int ac, char **argv)
 {
-    char *line = NULL; **cmd = NULL;
-    int i, status = 0;
+    char *line = NULL, **cmd = NULL;
+    int i;
+    int status = 0;
     (void)ac;
     (void)argv;
 
