@@ -1,5 +1,12 @@
 #include "sshell.h"
 
+/**
+ * tokenize - split a string into commands
+ * @line: string to be tokenized
+ *
+ * Return: token
+ */
+
 char **tokenize(char *line)
 {
 char *token = NULL, *tmp = NULL;

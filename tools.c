@@ -1,5 +1,12 @@
 #include "sshell.h"
 
+/**
+ * free_string_array - free memory allocated to the token array
+ * @array: the array whose allocated memory needs to be freed
+ *
+ * Return: 0
+ */
+
 void free_string_array(char **array)
 {
 int i;

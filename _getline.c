@@ -1,5 +1,11 @@
 #include "sshell.h"
 
+/**
+ * readLine - reads input from the shell prompt
+ *
+ * Return: 0
+ */
+
 char *readLine(void)
 {
 char *line = NULL;

@@ -1,5 +1,13 @@
 #include "sshell.h"
 
+/**
+ * _run - execute commands after being parsed
+ * @cmd: command to be executed
+ * @argv: array of arguments that follow the command
+ *
+ * Return: 0
+ */
+
 int _run(char **cmd, char **argv)
 {
 pid_t child;
