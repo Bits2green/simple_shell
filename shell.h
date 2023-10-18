@@ -19,6 +19,11 @@
 #include <stdint.h>
 
 
+#define BUFFER_SIZE_READ 1024
+#define BUFFER_SIZE_WRITE 1024
+#define MAX_WORD_COUNT 100
+#define NEG_ONE -1
+#define REG_FLAG 0
 #define OR_FLAG 1
 #define AND_FLAG 2
 #define CHAIN_FLAG 3
@@ -29,19 +34,13 @@
 #define HIST_FILE_NAME ".ss_history"
 #define HIST_SIZE_MAX 4096
 #define SET_INFO
-#define BUFFER_SIZE_READ 1024
-#define BUFFER_SIZE_WRITE 1024
-#define MAX_WORD_COUNT 100
-#define NEG_ONE -1
-#define REG_FLAG 0	
-
-extern char **environ;
-
-{										\
+    {										\
 		NULL, NULL, NULL, 0, 0, 0, 0,		\
 		NULL, NULL, NULL, NULL, NULL,		\
 		0, 0, NULL, 0, 0, 0					\
 	}
+
+extern char **environ;
 
 typedef struct ListNode
 {
