@@ -12,7 +12,7 @@ int _run(char **cmd, char **argv)
         {
             perror(argv[0]);
             free_string_array(cmd);
-
+            exit(0);
         }
 
     }
