@@ -14,4 +14,13 @@
 int _run(char **cmd, char **argv);
 char *readLine(void);
 
+/*strings.c*/
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+int _strdup(const char *str);
+
+
+
 #endif

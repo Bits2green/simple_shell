@@ -9,8 +9,7 @@
 
 int main(int ac, char **argv)
 {
-    char *line = NULL;
-    /*char **cmd = NULL;*/
+    char *line = NULL; **cmd = NULL;
     int status = 0;
     (void)ac; (void)argv;
 
@@ -19,14 +18,14 @@ int main(int ac, char **argv)
         line = readLine();
         if (line == NULL) /*EOF or ctrlD*/
         {
-            write(STDOUT_FILENO, "\n ", 1);
+            if (isatty(STDIN_FILENO))
+                write(STDOUT_FILENO, "\n ", 1);
             return (status);
         }
 
-        printf("%s\n", line);
         free(line);
-        /*cmd = tokenize(line);
+        cmd = tokenize(line);
 
-        status = _run(cmd, argv);*/
+        /*status = _run(cmd, argv);*/
     }
 }
