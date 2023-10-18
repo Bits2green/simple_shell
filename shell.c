@@ -23,7 +23,6 @@ int main(int ac, char **argv)
             return (status);
         }
 
-        free(line);
         cmd = tokenize(line);
 
         /*status = _run(cmd, argv);*/
