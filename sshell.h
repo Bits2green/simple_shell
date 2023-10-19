@@ -17,7 +17,7 @@ extern char **environ;
 
 char **tokenize(char *line);
 
-int _run(char **cmd, char **argv);
+int _run(char **cmd, char **argv, int index);
 char *readLine(void);
 void free_string_array(char **array);
 
@@ -28,6 +28,12 @@ int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 char *_strdup(const char *str);
 
+/*Env*/
 char *_getenv(char *var);
+char *_getpath(char *cmd);
+
+void _perror(char *name, char *cmd, int index);
+char * _atoi(int n);
+void reverse_string(char *str, int len);
 
 #endif

@@ -10,7 +10,7 @@
 int main(int ac, char **argv)
 {
 char *line = NULL, **cmd = NULL;
-int status = 0;
+int status = 0, index = 0;
 (void)ac;
 
 while (1)
@@ -23,10 +23,11 @@ write(STDOUT_FILENO, "\n", 1);
 return (status);
 }
 
+index++;
 cmd = tokenize(line);
 if (!cmd)
 continue;
 
-status = _run(cmd, argv);
+status = _run(cmd, argv, index);
 }
 }
