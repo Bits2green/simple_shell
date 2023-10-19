@@ -43,10 +43,12 @@ void reverse_string(char *str, int len);
 
 /*_builtin.c*/
 void _display_env(char **cmd, int *status);
-void _quit_shell(char **cmd, int *status);
+void _quit_shell(char **cmd, char **argv, int *status, int index);
 void _handle_b(char **cmd, char **argv, int *status, int index);
 int _builtin_s(char *cmd);
 
+int custom_atoi(char *str);
+int num_is_pos(char *str);
 
 
 #endif

@@ -47,8 +47,8 @@ free(idx);
 }
 
 /**
-* _atoi - convert string to integer
-* @n: string to be converted
+* _atoi - convert integer to string
+* @n: integer to be converted
 *
 * Return: 0
 */
