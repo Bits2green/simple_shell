@@ -53,36 +53,35 @@ _display_env(cmd, status);
 
 void _quit_shell(char **cmd, char **argv, int *status, int index)
 {
-    int exit_val = (*status);
-    char *qindex;
-    msg[]= ": exit: Forbidden number: ";
+int exit_val = (*status);
+char *qindex, msg[] = ": exit: Forbidden number: ";
 
 
-    if (cmd[1])
-    {
-        if (num_is_pos(cmd[1]))
-        {
-            exit_val = custom_atoi(cmd[1]);
-            
-        }
-        else
-        {
-            qindex = _atoi(index)
-            write(STDERR_FILENO, argv, _strlen(argv));
-            write(STDERR_FILENO, ": ", 2);
-            write(STDERR_FILENO, qindex, _strlen(qindex));
-            write(STDERR_FILENO, msg, _strlen(msg));
-            write(STDERR_FILENO, cmd[1], _strlen(cmd[1]));
-            write(STDERR_FILENO, "\n", 1);
-            free(qindex);
-            free_string_array(cmd);
-            (*status) = 2;
-            
-            return;
-        }
-    }
+if (cmd[1])
+{
+if (num_is_pos(cmd[1]))
+{
+exit_val = custom_atoi(cmd[1]);
+
+}
+else
+{
+qindex = _atoi(index);
+write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+write(STDERR_FILENO, ": ", 2);
+write(STDERR_FILENO, qindex, _strlen(qindex));
+write(STDERR_FILENO, msg, _strlen(msg));
+write(STDERR_FILENO, cmd[1], _strlen(cmd[1]));
+write(STDERR_FILENO, "\n", 1);
+free(qindex);
 free_string_array(cmd);
-exit(*status);
+(*status) = 2;
+
+return;
+}
+}
+free_string_array(cmd);
+exit(exit_val);
 }
 
 /**
