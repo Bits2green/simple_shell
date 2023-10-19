@@ -43,7 +43,7 @@ void reverse_string(char *str, int len);
 
 /*_builtin.c*/
 void _display_env(char **cmd, int *status);
-void _quit_shell(char *cmd, int *status);
+void _quit_shell(char **cmd, int *status);
 void _handle_b(char **cmd, char **argv, int *status, int index);
 int _builtin_s(char *cmd);
 
