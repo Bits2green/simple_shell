@@ -1,5 +1,11 @@
 #include "sshell.h"
 
+/**
+ * _getenv - gets the environment vars
+ * @var: variables to be acquired
+ * Return: 0
+*/
+
 char *_getenv(char *var)
 {
     char *tmp, *key, *value, *env;

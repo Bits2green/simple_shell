@@ -4,7 +4,7 @@
  * _run - execute commands after being parsed
  * @cmd: command to be executed
  * @argv: array of arguments that follow the command
- *
+ * @index: index
  * Return: 0
  */
 

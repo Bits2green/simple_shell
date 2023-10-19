@@ -22,6 +22,14 @@ array[i] = NULL;
 free(array), array = NULL;
 }
 
+/**
+ * _perror - prints error messages to stdout
+ * @name: name of errant argument
+ * @cmd: command name
+ * @index: error code
+ * 
+ * Return: 0
+*/
 void _perror(char *name, char *cmd, int index)
 {
     char *idx, msg[] = ": not found\n";
@@ -37,6 +45,13 @@ void _perror(char *name, char *cmd, int index)
     
     free(idx);
 }
+
+/**
+ * _atoi - convert string to integer
+ * @n: string to be converted
+ * 
+ * Return: 0
+*/
 
 char * _atoi(int n)
 {
@@ -59,6 +74,14 @@ char * _atoi(int n)
 
     return (_strdup(buffer));
 }
+
+/**
+ * reverse_string - reverses a string
+ * @str: string to be reversed
+ * @len: length of string to be reversed
+ * 
+ * Return: 0
+*/
 
 void reverse_string(char *str, int len)
 {

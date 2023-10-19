@@ -1,5 +1,11 @@
 #include "sshell.h"
 
+/**
+ * _getpath - gets the encironment path to find commands
+ * @cmd: the command to be found by _getpath
+ * Return: 0
+*/
+
 char *_getpath(char *cmd)
 {
     char *env_path, *full_cmd, *dir;
