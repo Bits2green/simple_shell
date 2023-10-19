@@ -1,8 +1,8 @@
 #include "sshell.h"
 
 /**
- * _builtin -
- * @cmd:
+ * _builtin - creates a storage of native commands
+ * @cmd: the command to be built in
  * Return: 0
 */
 
@@ -22,6 +22,15 @@ int _builtin_s(char *cmd)
     return (0);
 }
 
+/**
+ * _handle_b - handles builtin commands
+ * @cmd: builtin command to be executed
+ * @argv: arguments array
+ * @status: command code
+ * @index: void
+ * Return: 0
+*/
+
 void _handle_b(char **cmd, char **argv, int *status, int index)
 {
     (void) argv;
@@ -33,11 +42,25 @@ void _handle_b(char **cmd, char **argv, int *status, int index)
         _display_env(cmd, status);  
 }
 
+/**
+ * _quit_shell - Exits shell interactive mode
+ * @cmd: command to exit
+ * @status: exit code
+ * Return: 0
+*/
+
 void _quit_shell(char **cmd, int *status)
 {
     free_string_array(cmd);
     exit(*status);
 }
+
+/**
+ * _display_env - Prints the environment variables
+ * @cmd: commdand to print
+ * @status: void
+ * Return: 0
+*/
 
 void _display_env(char **cmd, int *status)
 {
