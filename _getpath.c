@@ -1,11 +1,9 @@
 #include "sshell.h"
-
 /**
 * _getpath - gets the encironment path to find commands
 * @cmd: the command to be found by _getpath
 * Return: 0
 */
-
 char *_getpath(char *cmd)
 {
 char *env_path, *full_cmd, *dir;
@@ -18,10 +16,7 @@ if (cmd[i] == '/')
 {
 if (stat(cmd, &st) == 0)
 return (_strdup(cmd));
-
-return (NULL);
-}
-}
+return (NULL); } }
 
 env_path = _getenv("PATH");
 if (!env_path)
@@ -39,15 +34,9 @@ _strcat(full_cmd, cmd);
 if (stat(full_cmd, &st) == 0)
 {
 free(env_path);
-return (full_cmd);
-
-}
+return (full_cmd); }
 free(full_cmd), full_cmd = NULL;
 
-dir = strtok(NULL, ":");
-
-}
-}
+dir = strtok(NULL, ":"); } }
 free(env_path);
-return (NULL);
-}
+return (NULL); }
