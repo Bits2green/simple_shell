@@ -1,10 +1,10 @@
 #include "sshell.h"
 
 /**
- * readLine - reads input from the shell prompt
- *
- * Return: 0
- */
+* readLine - reads input from the shell prompt
+*
+* Return: 0
+*/
 
 char *readLine(void)
 {
