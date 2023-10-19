@@ -44,8 +44,9 @@ char * _atoi(int n)
     int i = 0;
 
     if (n == 0)
-        buffer[i++] = \0';
-    else{
+        buffer[i++] = '\0';
+    else
+    {
         while (n > 0)
         {
             buffer[i++] = (n % 10) +'0';
