@@ -29,9 +29,9 @@ if (!cmd)
 continue;
 
 if (_builtin_s(cmd[0]))
-    _handle_b(cmd, argv, &status, index);
+_handle_b(cmd, argv, &status, index);
 
 else
-    status = _run(cmd, argv, index);
+status = _run(cmd, argv, index);
 }
 }
